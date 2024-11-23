@@ -50,6 +50,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damage: 1
   _existDuration: 3
+  _destroyOnCollide: 1
+  _reflects:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!33 &3563768894266395803
 MeshFilter:
   m_ObjectHideFlags: 0
