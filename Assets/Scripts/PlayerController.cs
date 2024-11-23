@@ -26,14 +26,14 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
-        var stepLength = 0.1f;
+        var stepHeight = 0.1f;
         var halfExtent = 0.5f;
         var extentMargin = 0.05f;
         var extents = new Vector3(halfExtent - extentMargin, halfExtent, halfExtent - extentMargin);
 
         if (_rb.linearVelocity.y <= 0)
         {
-            if (Physics.BoxCast(transform.position + Vector3.up * stepLength, extents, Vector3.down, Quaternion.identity, halfExtent + stepLength))
+            if (Physics.BoxCast(transform.position + Vector3.up * stepHeight, extents, Vector3.down, Quaternion.identity, halfExtent + stepHeight))
             {
                 _currJumpCount = 0;
             }
