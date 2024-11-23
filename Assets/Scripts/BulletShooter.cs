@@ -5,13 +5,13 @@ public class BulletShooter : MonoBehaviour
 {
     [SerializeField] GameObject _bulletPref;
     [SerializeField] float _shootForce = 10;
-    [SerializeField] float _interval = 0.2f;
+    [SerializeField] float _bulletInterval = 0.2f;
     protected bool _isAttacking = false;
     float _timeSinceShoot = 0;
 
     protected void TryShoot(Vector3 targetPos)
     {
-        if (_isAttacking && _interval < _timeSinceShoot)
+        if (_isAttacking && _bulletInterval < _timeSinceShoot)
         {
             _timeSinceShoot = 0;
 

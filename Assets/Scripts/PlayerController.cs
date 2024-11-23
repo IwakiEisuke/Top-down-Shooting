@@ -40,6 +40,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
+    /*
+     *     inputs
+     */
+
     private void OnMove(InputValue value)
     {
         var axis = value.Get<Vector2>();

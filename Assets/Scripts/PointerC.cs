@@ -5,6 +5,12 @@ public class PointerC : MonoBehaviour
     [SerializeField] LayerMask _layerMask;
     [SerializeField] PlayerController _player;
     [SerializeField] float _maxDistance = 100;
+
+    [Header("照準補正機能")]
+    [SerializeField] bool _assist;
+    [SerializeField] float _yAssistRange = 0.5f;
+    [SerializeField] float _distanceToGround = 0.5f;
+
     LineRenderer _line;
 
     /// <summary>
@@ -26,6 +32,17 @@ public class PointerC : MonoBehaviour
         if (Physics.Raycast(cameraRay, out var cameraHit, float.MaxValue, _layerMask)) // マウス位置にレイを飛ばす
         {
             SetPoint(cameraHit.point);
+            
+            if (_assist && Mathf.Abs(transform.position.y - _distanceToGround - cameraHit.point.y) < _yAssistRange)
+            {
+                var targetPos = cameraHit.point;
+                targetPos.y = transform.position.y;
+                SetPoint(targetPos);
+            }
+            else
+            {
+                SetPoint(cameraHit.point);
+            }
         }
         else // レイがヒットしなかったらプレイヤーと大体同じ高さのマウス位置を与える
         {
