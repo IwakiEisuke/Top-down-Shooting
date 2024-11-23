@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyStatsManager : MonoBehaviour
+public class StatsManager : MonoBehaviour
 {
     [SerializeField] int _hp = 5;
 
