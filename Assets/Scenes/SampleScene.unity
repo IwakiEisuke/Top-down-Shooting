@@ -622,6 +622,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f181ca3917bcfbc4e9eb7f0f12499d33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 183
   _player: {fileID: 785693840}
   _maxDistance: 100
 --- !u!120 &596447173
@@ -745,8 +748,9 @@ GameObject:
   - component: {fileID: 785693836}
   - component: {fileID: 785693835}
   - component: {fileID: 785693840}
+  - component: {fileID: 785693842}
   - component: {fileID: 785693841}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -914,6 +918,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &785693842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 785693834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05a5cefdc4f2d7b43ac9a16f827565be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bulletPref: {fileID: 6260940122019472227, guid: d455983de4c3224449ee91c817e446bc, type: 3}
+  _pointer: {fileID: 596447172}
+  _shootForce: 50
+  _interval: 0.2
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0

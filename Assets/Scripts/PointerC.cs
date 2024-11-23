@@ -1,24 +1,29 @@
-using UnityEditor.Rendering;
 using UnityEngine;
 
 public class PointerC : MonoBehaviour
 {
+    [SerializeField] LayerMask _layerMask;
     [SerializeField] PlayerController _player;
     [SerializeField] float _maxDistance = 100;
     LineRenderer _line;
+
+    /// <summary>
+    /// 終端位置
+    /// </summary>
+    public Vector3 Position { get; private set; }
 
     private void Start()
     {
         _line = GetComponent<LineRenderer>();
     }
 
-    void FixedUpdate()
+    void Update()
     {
         _line.SetPosition(0, _player.transform.position);
 
         Ray cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(cameraRay, out var cameraHit)) // マウス位置にレイを飛ばす
+        if (Physics.Raycast(cameraRay, out var cameraHit, float.MaxValue, _layerMask)) // マウス位置にレイを飛ばす
         {
             SetPoint(cameraHit.point);
         }
@@ -34,14 +39,16 @@ public class PointerC : MonoBehaviour
     void SetPoint(Vector3 target)
     {
         Ray lineRay = new(_player.transform.position, target - _player.transform.position);
-        if (Physics.Raycast(lineRay, out var lineHit, _maxDistance)) // プレイヤー位置からターゲットにレイを飛ばす
+        if (Physics.Raycast(lineRay, out var lineHit, _maxDistance, _layerMask)) // プレイヤー位置からターゲットにレイを飛ばす
         {
-            _line.SetPosition(1, lineHit.point); // レイが当たればその位置を終端にする
+            // レイが当たればその位置を終端にする
+            Position = lineHit.point;
         }
         else
         {
             // レイが当たらなければプレイヤーからターゲット方向へ一定距離伸ばした位置を終端にする
-            _line.SetPosition(1, _player.transform.position + (target - _player.transform.position).normalized * _maxDistance); 
+            Position = _player.transform.position + (target - _player.transform.position).normalized * _maxDistance;
         }
+        _line.SetPosition(1, Position);
     }
 }
