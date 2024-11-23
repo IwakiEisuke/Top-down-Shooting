@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Shoot : MonoBehaviour
+public class BulletShooter : MonoBehaviour
 {
     [SerializeField] GameObject _bulletPref;
     [SerializeField] PointerC _pointer;
