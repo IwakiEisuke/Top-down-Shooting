@@ -6,32 +6,111 @@ public class EnemyController : MonoBehaviour
 {
     [SerializeField] float _speed = 3;
     [SerializeField] string _playerName = "Player";
+    [SerializeField] EnemyBulletShooter _bulletShooter;
+    [SerializeField] float _playerDetectDistance;
+    [SerializeField] float _groundDetectDistance;
+    [SerializeField] float _canGroundedAngle;
     Transform _player;
     Rigidbody _rb;
     NavMeshAgent _agent;
-    Vector3 _direction;
+    Coroutine _currentCoroutine;
+    bool _playerDetected;
 
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
         _player = GameObject.Find(_playerName).transform;
         _agent = _rb.GetComponent<NavMeshAgent>();
-        StartCoroutine(Move());
+        _currentCoroutine = StartCoroutine(Attack());
     }
 
-    IEnumerator Move()
+    private void Update()
     {
-        _agent.destination = NewPos();
-        yield return new WaitForSeconds(Random.Range(1f, 3f));
-        StartCoroutine(Move());
+        //　プレイヤーが一定距離に入ったら検知状態に移行
+        if ((_player.transform.position - transform.position).sqrMagnitude <= _playerDetectDistance * _playerDetectDistance)
+        {
+            _playerDetected = true;
+        }
+
+        // 一定距離以内に地面があり、地面の傾きが少ない
+        var cos = Mathf.Cos(Mathf.PI * _canGroundedAngle / 180);
+        if (Physics.Raycast(transform.position, transform.up * -1, out var hit, _groundDetectDistance) && Vector3.Dot(hit.normal, Vector3.up) > cos)
+        {
+            _agent.isStopped = false;
+            _agent.updatePosition = true;
+            if (_currentCoroutine == null) NextState();
+        }
+        else
+        {
+            // エージェントを切り、現在の行動をキャンセル
+            _agent.isStopped = true;
+            _agent.updatePosition = false;
+            _agent.Warp(transform.position);
+            if (_currentCoroutine != null)
+            {
+                StopCoroutine(_currentCoroutine);
+                _currentCoroutine = null;
+            }
+        }
     }
 
-    private Vector3 NewPos()
+    IEnumerator Attack()
+    {
+        // プレイヤーと射線が通っていればランダムに動く
+        var moveDir = transform.position - _player.transform.position;
+        moveDir.y = 0;
+        moveDir = Quaternion.Euler(0, Random.Range(-120, 120), 0) * moveDir;
+        moveDir.Normalize();
+        var target = transform.position + moveDir * _speed;
+
+        yield return new WaitUntil(() => _playerDetected);
+        _agent.destination = target;
+        yield return new WaitForSeconds(0.5f);
+
+        if (CheckPassPlayer())
+        {
+            _bulletShooter.Shoot();
+            yield return new WaitForSeconds(Random.Range(1f, 3f));
+        }
+
+        _currentCoroutine = null;
+    }
+
+    private void NextState()
+    {
+        if (CheckPassPlayer())
+        {
+            _currentCoroutine ??= StartCoroutine(Attack());
+        }
+        else
+        {
+            _agent.destination = _player.transform.position; // プレイヤーを追いかける
+        }
+    }
+
+    private bool CheckPassPlayer()
     {
         var dir = _player.transform.position - transform.position;
-        dir.y = 0;
-        dir = Quaternion.Euler(0, Random.Range(-90, 90), 0) * dir;
-        dir.Normalize();
-        return transform.position + dir * _speed;
+        // プレイヤー方向にレイを飛ばす
+        Physics.Raycast(transform.position, dir, out var hit, float.MaxValue);
+        //　レイがヒットした　＆＆　プレイヤー以外に当たらなかった
+        return  hit.collider && LayerMask.LayerToName(hit.collider.gameObject.layer) == "Player";
+    }
+
+    private void OnDestroy()
+    {
+        _agent.isStopped = false;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        var newForward = transform.forward;
+        newForward.y = 0;
+        transform.forward = newForward;
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        _rb.linearVelocity = new Vector3(_rb.linearVelocity.x, 0, _rb.linearVelocity.z);
     }
 }
