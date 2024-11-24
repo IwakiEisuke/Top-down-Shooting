@@ -32,19 +32,19 @@ public class EnemyController : MonoBehaviour
             _playerDetected = true;
         }
 
-        // 一定距離以内に地面があり、地面の傾きが少ない
+        // 一定距離以内にナビメッシュがある && 現在位置との高低差が少ない &&
+        // 足元方向の一定距離内に地面がある && 地面の傾きが少ない
         var cos = Mathf.Cos(Mathf.PI * _canGroundedAngle / 180);
-        if (Physics.Raycast(transform.position, transform.up * -1, out var hit, _groundDetectDistance) && Vector3.Dot(hit.normal, Vector3.up) > cos)
+        if (NavMesh.SamplePosition(transform.position, out var navHit, _groundDetectDistance, NavMesh.AllAreas) && Mathf.Abs(navHit.position.y - transform.position.y) < _groundDetectDistance &&
+            Physics.Raycast(transform.position, transform.up * -1, out var hit, _groundDetectDistance) && Vector3.Dot(hit.normal, Vector3.up) > cos)
         {
-            _agent.isStopped = false;
-            _agent.updatePosition = true;
+            _agent.enabled = true;
             if (_currentCoroutine == null) NextState();
         }
         else
         {
             // エージェントを切り、現在の行動をキャンセル
-            _agent.isStopped = true;
-            _agent.updatePosition = false;
+            _agent.enabled = false;
             _agent.Warp(transform.position);
             if (_currentCoroutine != null)
             {
@@ -82,7 +82,7 @@ public class EnemyController : MonoBehaviour
         {
             _currentCoroutine ??= StartCoroutine(Attack());
         }
-        else
+        else if (_agent.isOnNavMesh)
         {
             _agent.destination = _player.transform.position; // プレイヤーを追いかける
         }
@@ -95,11 +95,6 @@ public class EnemyController : MonoBehaviour
         Physics.Raycast(transform.position, dir, out var hit, float.MaxValue);
         //　レイがヒットした　＆＆　プレイヤー以外に当たらなかった
         return  hit.collider && LayerMask.LayerToName(hit.collider.gameObject.layer) == "Player";
-    }
-
-    private void OnDestroy()
-    {
-        _agent.isStopped = false;
     }
 
     private void OnCollisionEnter(Collision collision)
