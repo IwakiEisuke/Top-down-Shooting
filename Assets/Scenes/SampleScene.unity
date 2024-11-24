@@ -1460,10 +1460,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 785693834}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 529f4eb93a8bab445808bf749c18f12c, type: 3}
+  m_Script: {fileID: 11500000, guid: 53941b175a417e740b48886807d63bb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 100
+  _maxHP: 10
+  _hpSlider: {fileID: 1084093424}
 --- !u!4 &829875706 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3525715255774454743, guid: 24cd457a468d33f4db0991115e11ed0c, type: 3}
@@ -2061,7 +2062,7 @@ GameObject:
   - component: {fileID: 1342009648}
   - component: {fileID: 1342009647}
   - component: {fileID: 1342009651}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: DestroyPlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
