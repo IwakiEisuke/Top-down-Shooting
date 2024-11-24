@@ -6,13 +6,14 @@ public class Bullet : MonoBehaviour
     [SerializeField] float _existDuration = 10f;
     [SerializeField] bool _destroyOnCollide;
     [SerializeField] LayerMask _reflects;
+    [SerializeField] TrailRenderer _trail;
     Rigidbody _rb;
     bool _isAttacked;
 
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();
-        Destroy(gameObject, _existDuration);
+        Invoke(nameof(DestroyBullet), _existDuration);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -24,7 +25,7 @@ public class Bullet : MonoBehaviour
             {
                 stats.DealDamage(_damage);
                 _isAttacked = true;
-                Destroy(gameObject);
+                DestroyBullet();
             }
         }
 
@@ -39,7 +40,17 @@ public class Bullet : MonoBehaviour
         var layerMask = ~_reflects; // Ç»Ç∫Ç©ÉCÉìÉâÉCÉìÇæÇ∆îΩì]Ç≈Ç´Ç»Ç¢Åc
         if (_destroyOnCollide && (layerMask &= 1 << collision.gameObject.layer) != 0)
         {
-            Destroy(gameObject);
+            DestroyBullet();
         }
+    }
+
+    private void DestroyBullet()
+    {
+        if (_trail)
+        {
+            _trail.transform.parent = null;
+            _trail.autodestruct = true;
+        }
+        Destroy(gameObject);
     }
 }
