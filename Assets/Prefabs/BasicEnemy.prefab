@@ -68,7 +68,7 @@ MonoBehaviour:
   _playerName: Player
   _bulletShooter: {fileID: -2955620465472108805}
   _playerDetectDistance: 20
-  _groundDetectDistance: 0.55
+  _groundDetectDistance: 0.6
   _canGroundedAngle: 30
 --- !u!114 &-2955620465472108805
 MonoBehaviour:
@@ -198,7 +198,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 5013673448699289525}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.2
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -208,6 +208,6 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1
-  m_BaseOffset: 0.4
+  m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4

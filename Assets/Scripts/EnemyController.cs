@@ -99,9 +99,11 @@ public class EnemyController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        //Å@ãNÇ±Ç∑
         var newForward = transform.forward;
         newForward.y = 0;
         transform.forward = newForward;
+        transform.up = Vector3.up;
     }
 
     private void OnCollisionExit(Collision collision)
