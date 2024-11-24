@@ -1447,7 +1447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 046f2a71a8967f1418a22946c5ddfd45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletPref: {fileID: 6260940122019472227, guid: d455983de4c3224449ee91c817e446bc, type: 3}
+  _bulletPref: {fileID: 5807220881213474616, guid: 721ddc61be5330944be9219e99204d20, type: 3}
   _shootForce: 50
   _bulletInterval: 0.2
   _pointer: {fileID: 596447172}
