@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 8561080779524773513}
   - component: {fileID: -8781120719091576486}
   m_Layer: 8
-  m_Name: BasicEnemy
+  m_Name: BasicEnemyBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
