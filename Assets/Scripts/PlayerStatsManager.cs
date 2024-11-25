@@ -11,6 +11,7 @@ public class PlayerStatsManager : StatsManager
         base.Start();
         var rect = _hpSlider.GetComponent<RectTransform>();
         rect.sizeDelta = new Vector2(_hpSprite.width * _maxHP, rect.sizeDelta.y);
+        OnUpdateHP();
     }
 
     override protected void OnUpdateHP()
