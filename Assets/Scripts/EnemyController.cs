@@ -32,11 +32,20 @@ public class EnemyController : MonoBehaviour
             _playerDetected = true;
         }
 
-        // 一定距離以内にナビメッシュがある && 現在位置との高低差が少ない &&
-        // 足元方向の一定距離内に地面がある && 地面の傾きが少ない
+
+        if (!_playerDetected)
+        {
+            return;
+        }
+
+        
         var cos = Mathf.Cos(Mathf.PI * _canGroundedAngle / 180);
-        if (NavMesh.SamplePosition(transform.position, out var navHit, _groundDetectDistance, NavMesh.AllAreas) && Mathf.Abs(navHit.position.y - transform.position.y) < _groundDetectDistance &&
-            Physics.Raycast(transform.position, transform.up * -1, out var hit, _groundDetectDistance) && Vector3.Dot(hit.normal, Vector3.up) > cos)
+
+        NavMesh.SamplePosition(transform.position, out var navHit, _groundDetectDistance, NavMesh.AllAreas);
+        Physics.Raycast(transform.position, transform.up * -1, out var hit, _groundDetectDistance);
+
+        // 一定距離以内にナビメッシュがある && 足元方向の一定距離内に地面がある && 地面の傾きが少ない
+        if (navHit.hit && hit.collider && Vector3.Dot(hit.normal, Vector3.up) > cos)
         {
             _agent.enabled = true;
             if (_currentCoroutine == null) NextState();
@@ -90,24 +99,43 @@ public class EnemyController : MonoBehaviour
 
     private bool CheckPassPlayer()
     {
-        var dir = _player.transform.position - transform.position;
-        // プレイヤー方向にレイを飛ばす
-        Physics.Raycast(transform.position, dir, out var hit, float.MaxValue);
-        //　レイがヒットした　＆＆　プレイヤー以外に当たらなかった
-        return  hit.collider && LayerMask.LayerToName(hit.collider.gameObject.layer) == "Player";
+        return CheckPassPlayer(out _);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private bool CheckPassPlayer(out RaycastHit hit)
     {
-        //　起こす
-        var newForward = transform.forward;
-        newForward.y = 0;
-        transform.forward = newForward;
-        transform.up = Vector3.up;
+        var dir = _player.transform.position - transform.position;
+        Physics.Raycast(transform.position, dir, out hit, float.MaxValue); // プレイヤー方向にレイを飛ばす
+        return hit.collider && LayerMask.LayerToName(hit.collider.gameObject.layer) == "Player"; //　レイがヒットした　＆＆　プレイヤー以外に当たらなかった
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        _rb.linearVelocity = new Vector3(_rb.linearVelocity.x, 0, _rb.linearVelocity.z);
+        if (!_rb.isKinematic)
+        {
+            _rb.linearVelocity = new Vector3(_rb.linearVelocity.x, 0, _rb.linearVelocity.z);
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (UnityEditor.EditorApplication.isPlaying)
+        {
+            Gizmos.matrix = Matrix4x4.TRS(transform.position, transform.rotation, transform.lossyScale);
+
+            if (_agent.enabled)
+            {
+                var color = Color.green;
+                color.a = 0.5f;
+                Gizmos.color = color;
+                Gizmos.DrawCube(Vector3.zero, Vector3.one * 1.01f);
+            }
+
+            if (CheckPassPlayer())
+            {
+                Gizmos.color = Color.magenta;
+                Gizmos.DrawCube(Vector3.up, Vector3.one * 0.5f);
+            }
+        }
     }
 }

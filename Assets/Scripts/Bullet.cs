@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Bullet : MonoBehaviour
 {
@@ -18,6 +19,16 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (collision.rigidbody)
+        {
+            Debug.Log($"b : {collision.rigidbody.mass} {collision.impulse} {collision.relativeVelocity}");
+        }
+
+        if (collision.gameObject.TryGetComponent<NavMeshAgent>(out var agent) && collision.gameObject.TryGetComponent<AgentSettings>(out var settings))
+        {
+            agent.velocity -= collision.impulse / collision.rigidbody.mass / settings.LinearDrag;
+        }
+
         // Šù‚É‰½‚©‚µ‚ç‚Éƒ_ƒ[ƒW‚ğ—^‚¦‚Ä‚¢‚½‚çUŒ‚‚Å‚«‚È‚¢
         if (!_isAttacked && collision.gameObject.TryGetComponent<StatsManager>(out var stats))
         {
