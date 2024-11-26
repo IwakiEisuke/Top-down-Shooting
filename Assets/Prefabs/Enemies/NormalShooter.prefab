@@ -100,7 +100,7 @@ MonoBehaviour:
   _playerName: Player
   _bulletShooter: {fileID: 7041618703687266052}
   _playerDetectDistance: 20
-  _groundDetectDistance: 0.6
+  _groundDetectDistance: 1
   _canGroundedAngle: 30
 --- !u!114 &7041618703687266052
 MonoBehaviour:
@@ -160,7 +160,7 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2048
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
@@ -230,7 +230,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 8663237838521451074}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.2
+  m_Radius: 1
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
