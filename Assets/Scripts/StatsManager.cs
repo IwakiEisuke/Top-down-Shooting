@@ -3,6 +3,7 @@ using UnityEngine;
 public class StatsManager : MonoBehaviour
 {
     [SerializeField] protected int _maxHP = 5;
+    [SerializeField] protected bool _invincible;
     protected int _currentHP;
 
     virtual protected void Start()
@@ -12,6 +13,11 @@ public class StatsManager : MonoBehaviour
 
     public void DealDamage(int damage)
     {
+        if (_invincible)
+        {
+            return;
+        }
+
         _currentHP -= damage;
         OnUpdateHP();
 
