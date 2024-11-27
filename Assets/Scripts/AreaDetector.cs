@@ -6,28 +6,46 @@ public class AreaDetector : MonoBehaviour
 {
     [SerializeField] List<GameObject> _detectObjects;
     [SerializeField] UnityEvent _allClearedEvent;
-    bool _activated;
+    bool _autoDetectionCompleted;
+    bool _eventInvoked;
+
+    private void Start()
+    {
+        var dummy = _detectObjects.ToArray();
+        foreach (GameObject obj in dummy)
+        {
+            if (!obj.TryGetComponent<Collider>(out _))
+            {
+                _detectObjects.Add(obj.GetComponentInChildren<Collider>().gameObject);
+                _detectObjects.Remove(obj);
+            }
+        }
+    }
 
     private void Update()
     {
-        foreach (GameObject obj in _detectObjects)
+        if (_autoDetectionCompleted)
         {
-            if (obj && obj.activeInHierarchy == true)
+            foreach (GameObject obj in _detectObjects)
             {
-                return;
+                if (obj && obj.activeInHierarchy == true)
+                {
+                    return;
+                }
             }
-        }
 
-        if (!_activated)
-        {
-            Debug.Log($"{name} is all cleared");
-            _allClearedEvent.Invoke();
-            _activated = true;
+            if (!_eventInvoked)
+            {
+                Debug.Log($"{name} is all cleared");
+                _allClearedEvent.Invoke();
+                _eventInvoked = true;
+            }
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        _autoDetectionCompleted = true;
         if (!_detectObjects.Contains(other.gameObject))
         {
             _detectObjects.Add(other.gameObject);
@@ -36,7 +54,7 @@ public class AreaDetector : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (_detectObjects.Contains(other.gameObject) || _detectObjects.Contains(other.transform.parent.gameObject))
+        if (_detectObjects.Contains(other.gameObject))
         {
             _detectObjects.Remove(other.gameObject);
         }

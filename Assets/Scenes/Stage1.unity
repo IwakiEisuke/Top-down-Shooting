@@ -1574,11 +1574,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2360875619894201983, guid: e63f65a2d4503dc40a61b449295cfd79, type: 3}
   m_PrefabInstance: {fileID: 2024558039}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &122486209 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 440488280783794712, guid: a655a50e4b282e9408b66826edbced36, type: 3}
-  m_PrefabInstance: {fileID: 1832502944}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &282425165
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18525,11 +18520,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1 &1048257939 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1618090137470770814, guid: e63f65a2d4503dc40a61b449295cfd79, type: 3}
-  m_PrefabInstance: {fileID: 1716193344}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1061461283
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18587,11 +18577,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a655a50e4b282e9408b66826edbced36, type: 3}
---- !u!1 &1068294726 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1618090137470770814, guid: e63f65a2d4503dc40a61b449295cfd79, type: 3}
-  m_PrefabInstance: {fileID: 1479273700}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1081560371
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22177,11 +22162,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 524926522}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1254150852 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 440488280783794712, guid: a655a50e4b282e9408b66826edbced36, type: 3}
-  m_PrefabInstance: {fileID: 469463208}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1328172588
 GameObject:
   m_ObjectHideFlags: 0
@@ -25520,11 +25500,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 844aef699e5543c4e9784ef275a28f2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _detectObjects:
-  - {fileID: 122486209}
-  - {fileID: 1254150852}
-  - {fileID: 1068294726}
-  - {fileID: 1048257939}
+  _detectObjects: []
   _allClearedEvent:
     m_PersistentCalls:
       m_Calls:
