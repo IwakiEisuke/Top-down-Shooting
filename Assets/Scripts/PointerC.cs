@@ -3,7 +3,7 @@ using UnityEngine;
 public class PointerC : MonoBehaviour
 {
     [SerializeField] LayerMask _layerMask;
-    [SerializeField] PlayerController _player;
+    [SerializeField] Transform _muzzle;
     [SerializeField] float _maxDistance = 100;
 
     [Header("照準補正機能")]
@@ -16,7 +16,7 @@ public class PointerC : MonoBehaviour
     /// <summary>
     /// 終端位置
     /// </summary>
-    public Vector3 Position { get; private set; }
+    public Vector3 HitPosition { get; private set; }
 
     private void Start()
     {
@@ -25,7 +25,7 @@ public class PointerC : MonoBehaviour
 
     void Update()
     {
-        _line.SetPosition(0, _player.transform.position);
+        _line.SetPosition(0, _muzzle.transform.position);
 
         Ray cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -47,7 +47,7 @@ public class PointerC : MonoBehaviour
         else // レイがヒットしなかったらプレイヤーと大体同じ高さのマウス位置を与える
         {
             var mousePos = Input.mousePosition;
-            mousePos.z = Vector3.Distance(_player.transform.position, Camera.main.transform.position);
+            mousePos.z = Vector3.Distance(_muzzle.transform.position, Camera.main.transform.position);
             var targetPos = Camera.main.ScreenToWorldPoint(mousePos);
             SetPoint(targetPos);
         }
@@ -55,17 +55,17 @@ public class PointerC : MonoBehaviour
 
     void SetPoint(Vector3 target)
     {
-        Ray lineRay = new(_player.transform.position, target - _player.transform.position);
+        Ray lineRay = new(_muzzle.transform.position, target - _muzzle.transform.position);
         if (Physics.Raycast(lineRay, out var lineHit, _maxDistance, _layerMask)) // プレイヤー位置からターゲットにレイを飛ばす
         {
             // レイが当たればその位置を終端にする
-            Position = lineHit.point;
+            HitPosition = lineHit.point;
         }
         else
         {
             // レイが当たらなければプレイヤーからターゲット方向へ一定距離伸ばした位置を終端にする
-            Position = _player.transform.position + (target - _player.transform.position).normalized * _maxDistance;
+            HitPosition = _muzzle.transform.position + (target - _muzzle.transform.position).normalized * _maxDistance;
         }
-        _line.SetPosition(1, Position);
+        _line.SetPosition(1, HitPosition);
     }
 }

@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 
     Vector3 _input;
     Rigidbody _rb;
+    Renderer _renderer;
     int _currJumpCount;
 
     Vector3 _respawnPoint;
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         _respawnPoint = transform.position;
+        _renderer = GetComponent<Renderer>();
     }
 
     private void Update()
@@ -33,7 +35,7 @@ public class PlayerController : MonoBehaviour
 
         if (_rb.linearVelocity.y <= 0)
         {
-            if (Physics.BoxCast(transform.position + Vector3.up * stepHeight, extents, Vector3.down, Quaternion.identity, halfExtent + stepHeight))
+            if (Physics.BoxCast(_renderer.bounds.center + Vector3.up * stepHeight, extents, Vector3.down, Quaternion.identity, halfExtent + stepHeight))
             {
                 _currJumpCount = 0;
             }

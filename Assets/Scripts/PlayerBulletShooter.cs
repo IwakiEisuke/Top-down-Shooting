@@ -8,7 +8,7 @@ public class PlayerBulletShooter : BulletShooter
     override protected void Update()
     {
         base.Update();
-        TryShoot(_pointer.Position);
+        TryShoot(_pointer.HitPosition);
     }
 
     private void OnFire(InputValue value)

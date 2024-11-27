@@ -155,7 +155,7 @@ MonoBehaviour:
   _layerMask:
     serializedVersion: 2
     m_Bits: 819
-  _player: {fileID: 3670255980668613487}
+  _muzzle: {fileID: 1279741543672290335}
   _maxDistance: 100
   _assist: 1
   _yAssistRange: 0.5
