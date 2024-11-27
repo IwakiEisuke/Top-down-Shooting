@@ -67,11 +67,6 @@ public class EnemyController : MonoBehaviour
                 _agent.isStopped = false;
             }
 
-            if (_agent.isOnOffMeshLink)
-            {
-                _agent.CompleteOffMeshLink();
-            }
-
             var cos = Mathf.Cos(Mathf.PI * _canGroundedAngle / 180);
             NavMesh.SamplePosition(transform.position, out var navHit, _groundDetectDistance, NavMesh.AllAreas);
             Physics.Raycast(transform.position, transform.up * -1, out var hit, _groundDetectDistance);

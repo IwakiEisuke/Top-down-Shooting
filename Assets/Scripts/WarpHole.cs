@@ -11,21 +11,26 @@ public class WarpHole : MonoBehaviour
     {
         if (!_onWarpedObjects.Contains(other))
         {
-            _target.Warp(other);
+            // ワープホールから
+            var offset = other.transform.position - transform.position;
+            offset.Scale(Vector3.up);
+            _target.Warp(other, offset);
+            UnityEditor.EditorApplication.isPaused = true;
         }
     }
 
-    public void Warp(Collider other)
+    public void Warp(Collider other, Vector3 offset)
     {
         _onWarpedObjects.Add(other);
+        
 
         if (other.TryGetComponent<NavMeshAgent>(out var agent))
         {
-            agent.Warp(transform.position);
+            agent.Warp(transform.position + offset);
         }
         else
         {
-            other.transform.position = transform.position;
+            other.transform.position = transform.position + offset;
         }
     }
 
