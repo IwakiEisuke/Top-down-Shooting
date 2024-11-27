@@ -11,11 +11,10 @@ public class WarpHole : MonoBehaviour
     {
         if (!_onWarpedObjects.Contains(other))
         {
-            // ワープホールから
+            // ワープ先で地面にめり込まないよう、ワープホールからの高さを取る
             var offset = other.transform.position - transform.position;
             offset.Scale(Vector3.up);
             _target.Warp(other, offset);
-            UnityEditor.EditorApplication.isPaused = true;
         }
     }
 
