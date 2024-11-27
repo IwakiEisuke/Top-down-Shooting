@@ -60,8 +60,12 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
-            _agent.updatePosition = true;
-            _agent.isStopped = false;
+            if (_agent.enabled)
+            {
+                // notMoving âèúóp
+                _agent.updatePosition = true;
+                _agent.isStopped = false;
+            }
 
             var cos = Mathf.Cos(Mathf.PI * _canGroundedAngle / 180);
             NavMesh.SamplePosition(transform.position, out var navHit, _groundDetectDistance, NavMesh.AllAreas);
