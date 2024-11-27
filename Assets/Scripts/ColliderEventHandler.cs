@@ -1,17 +1,17 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PushButton : MonoBehaviour
+public class ColliderEventHandler : MonoBehaviour
 {
     [SerializeField] UnityEvent OnTriggerEnterEvent;
-    bool isPushed;
+    bool _invoked;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!isPushed)
+        if (!_invoked)
         {
             OnTriggerEnterEvent.Invoke();
-            isPushed = true;
+            _invoked = true;
         }
     }
 }

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class AreaCondition : MonoBehaviour
+public class AreaDetector : MonoBehaviour
 {
     [SerializeField] List<GameObject> _detectObjects;
     [SerializeField] UnityEvent _allClearedEvent;
