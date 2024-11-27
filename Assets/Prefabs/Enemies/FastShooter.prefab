@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: de914cebb129b3841832b8c8cd882422, type: 2}
     - target: {fileID: 1618090137470770814, guid: e63f65a2d4503dc40a61b449295cfd79, type: 3}
       propertyPath: m_Name
-      value: Fasts
+      value: FastShooter
       objectReference: {fileID: 0}
     - target: {fileID: 2360875619894201983, guid: e63f65a2d4503dc40a61b449295cfd79, type: 3}
       propertyPath: m_LocalPosition.x
