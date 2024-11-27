@@ -11,6 +11,8 @@ public class EnemyController : MonoBehaviour
     [SerializeField] float _timeOfLoseSight;
     [SerializeField] float _groundDetectDistance;
     [SerializeField] float _canGroundedAngle;
+    [SerializeField] bool _needSeenForDetection;
+    [SerializeField] bool _notMoving;
     Transform _player;
     Rigidbody _rb;
     NavMeshAgent _agent;
@@ -30,7 +32,7 @@ public class EnemyController : MonoBehaviour
     {
         //　プレイヤーが一定距離に入ったか && プレイヤーを視認できるか
         if ((_player.transform.position - transform.position).sqrMagnitude <= _playerDetectDistance * _playerDetectDistance
-            && CheckPassPlayer())
+            && (!_needSeenForDetection || CheckPassPlayer()))
         {
             //　検知状態に移行
             _playerDetected = true;
@@ -50,25 +52,37 @@ public class EnemyController : MonoBehaviour
         if (!_playerDetected) return;
 
 
-        var cos = Mathf.Cos(Mathf.PI * _canGroundedAngle / 180);
-        NavMesh.SamplePosition(transform.position, out var navHit, _groundDetectDistance, NavMesh.AllAreas);
-        Physics.Raycast(transform.position, transform.up * -1, out var hit, _groundDetectDistance);
-
-        // 一定距離以内にナビメッシュがある && 足元方向の一定距離内に地面がある && 地面の傾きが少ない
-        if (navHit.hit && hit.collider && Vector3.Dot(hit.normal, Vector3.up) > cos)
+        if (_notMoving)
         {
-            _agent.enabled = true;
-            if (_currentCoroutine == null) NextState();
+            _agent.updatePosition = false;
+            _agent.isStopped = true;
+            NextState();
         }
         else
         {
-            // エージェントを切り、現在の行動をキャンセル
-            _agent.enabled = false;
-            _agent.Warp(transform.position);
-            if (_currentCoroutine != null)
+            _agent.updatePosition = true;
+            _agent.isStopped = false;
+
+            var cos = Mathf.Cos(Mathf.PI * _canGroundedAngle / 180);
+            NavMesh.SamplePosition(transform.position, out var navHit, _groundDetectDistance, NavMesh.AllAreas);
+            Physics.Raycast(transform.position, transform.up * -1, out var hit, _groundDetectDistance);
+
+            // 一定距離以内にナビメッシュがある && 足元方向の一定距離内に地面がある && 地面の傾きが少ない
+            if (navHit.hit && hit.collider && Vector3.Dot(hit.normal, Vector3.up) > cos)
             {
-                StopCoroutine(_currentCoroutine);
-                _currentCoroutine = null;
+                _agent.enabled = true;
+                if (_currentCoroutine == null) NextState();
+            }
+            else
+            {
+                // エージェントを切り、現在の行動をキャンセル
+                _agent.enabled = false;
+                _agent.Warp(transform.position);
+                if (_currentCoroutine != null)
+                {
+                    StopCoroutine(_currentCoroutine);
+                    _currentCoroutine = null;
+                }
             }
         }
     }
