@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6694926437060322503}
   - component: {fileID: 4136071409348661364}
   - component: {fileID: 8852990857649806279}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -340,7 +340,7 @@ GameObject:
   - component: {fileID: 2135863947955125015}
   - component: {fileID: 471008867319802771}
   - component: {fileID: 1732525941930301216}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Warp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -411,7 +411,7 @@ GameObject:
   - component: {fileID: 1064459732885990572}
   - component: {fileID: 5531005421573618085}
   - component: {fileID: 8647734772518681173}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pipe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
