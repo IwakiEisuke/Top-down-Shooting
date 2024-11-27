@@ -26,6 +26,7 @@ public class EnemyController : MonoBehaviour
         _player = GameObject.Find(_playerName).transform;
         _agent = _rb.GetComponent<NavMeshAgent>();
         _currentCoroutine = StartCoroutine(Attack());
+        if (_notMoving) _agent.enabled = false;
     }
 
     private void Update()
@@ -52,8 +53,7 @@ public class EnemyController : MonoBehaviour
         if (_notMoving)
         {
             // ’âŽ~ˆ—
-            _agent.updatePosition = false;
-            _agent.isStopped = true;
+            _agent.enabled = false;
             // UŒ‚‚È‚Ç‚Ì“®ì‚Ís‚¤
             NextState();
         }
@@ -102,7 +102,7 @@ public class EnemyController : MonoBehaviour
         var target = transform.position + moveDir * _speed;
 
         yield return new WaitUntil(() => _playerDetected);
-        _agent.destination = target;
+        if(_agent.isOnNavMesh) _agent.destination = target;
         yield return new WaitForSeconds(0.5f);
 
         if (CheckPassPlayer())
