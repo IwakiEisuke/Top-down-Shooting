@@ -49,18 +49,17 @@ public class EnemyController : MonoBehaviour
             }
         }
 
-        if (!_playerDetected) return;
-
-
         if (_notMoving)
         {
+            // 停止処理
             _agent.updatePosition = false;
             _agent.isStopped = true;
+            // 攻撃などの動作は行う
             NextState();
         }
         else
         {
-            if (_agent.enabled)
+            if (_agent.isOnNavMesh)
             {
                 // notMoving 解除用
                 _agent.updatePosition = true;
@@ -75,12 +74,14 @@ public class EnemyController : MonoBehaviour
             if (navHit.hit && hit.collider && Vector3.Dot(hit.normal, Vector3.up) > cos)
             {
                 _agent.enabled = true;
-                if (_currentCoroutine == null) NextState();
+                _rb.isKinematic = true;
+                NextState();
             }
             else
             {
                 // エージェントを切り、現在の行動をキャンセル
                 _agent.enabled = false;
+                _rb.isKinematic = false;
                 _agent.Warp(transform.position);
                 if (_currentCoroutine != null)
                 {
@@ -115,13 +116,16 @@ public class EnemyController : MonoBehaviour
 
     private void NextState()
     {
-        if (CheckPassPlayer())
+        if (_playerDetected)
         {
-            _currentCoroutine ??= StartCoroutine(Attack());
-        }
-        else if (_agent.isOnNavMesh)
-        {
-            _agent.destination = _player.transform.position; // プレイヤーを追いかける
+            if (CheckPassPlayer())
+            {
+                _currentCoroutine ??= StartCoroutine(Attack());
+            }
+            else if (_currentCoroutine == null && _agent.isOnNavMesh)
+            {
+                _agent.destination = _player.transform.position; // プレイヤーを追いかける
+            }
         }
     }
 
