@@ -154,7 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _layerMask:
     serializedVersion: 2
-    m_Bits: 823
+    m_Bits: 819
   _player: {fileID: 3670255980668613487}
   _maxDistance: 100
   _assist: 1
@@ -243,7 +243,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53941b175a417e740b48886807d63bb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHP: 10
+  _maxHP: 5
+  _invincible: 0
   _hpSlider: {fileID: 0}
   _hpSprite: {fileID: 2800000, guid: 6678bd0ba71a6da459d47ea11904747d, type: 3}
 --- !u!54 &5343210671958870318
@@ -256,7 +257,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 2
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
