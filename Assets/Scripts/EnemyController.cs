@@ -8,12 +8,14 @@ public class EnemyController : MonoBehaviour
     [SerializeField] string _playerName = "Player";
     [SerializeField] EnemyBulletShooter _bulletShooter;
     [SerializeField] float _playerDetectDistance;
+    [SerializeField] float _timeOfLoseSight;
     [SerializeField] float _groundDetectDistance;
     [SerializeField] float _canGroundedAngle;
     Transform _player;
     Rigidbody _rb;
     NavMeshAgent _agent;
     Coroutine _currentCoroutine;
+    float _playerUnDetectedTime;
     bool _playerDetected;
 
     void Start()
@@ -26,21 +28,29 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
-        //　プレイヤーが一定距離に入ったら検知状態に移行
-        if ((_player.transform.position - transform.position).sqrMagnitude <= _playerDetectDistance * _playerDetectDistance)
+        //　プレイヤーが一定距離に入ったか && プレイヤーを視認できるか
+        if ((_player.transform.position - transform.position).sqrMagnitude <= _playerDetectDistance * _playerDetectDistance
+            && CheckPassPlayer())
         {
+            //　検知状態に移行
             _playerDetected = true;
+            _playerUnDetectedTime = 0;
         }
-
-
-        if (!_playerDetected)
+        else
         {
-            return;
+            _playerUnDetectedTime += Time.deltaTime;
+
+            if (_playerUnDetectedTime > _timeOfLoseSight)
+            {
+                // 一定時間プレイヤーを認識できなければ検知状態を解除
+                _playerDetected = false;
+            }
         }
 
-        
-        var cos = Mathf.Cos(Mathf.PI * _canGroundedAngle / 180);
+        if (!_playerDetected) return;
 
+
+        var cos = Mathf.Cos(Mathf.PI * _canGroundedAngle / 180);
         NavMesh.SamplePosition(transform.position, out var navHit, _groundDetectDistance, NavMesh.AllAreas);
         Physics.Raycast(transform.position, transform.up * -1, out var hit, _groundDetectDistance);
 
