@@ -3,15 +3,27 @@ using UnityEngine.Events;
 
 public class ColliderEventHandler : MonoBehaviour
 {
+    [SerializeField] bool _oneShot = true;
     [SerializeField] UnityEvent OnTriggerEnterEvent;
-    bool _invoked;
+    [SerializeField] UnityEvent OnTriggerExitEvent;
+    bool _entered;
+    bool _exited;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!_invoked)
+        if (!_entered)
         {
             OnTriggerEnterEvent.Invoke();
-            _invoked = true;
+            _entered = _oneShot;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (!_exited)
+        {
+            OnTriggerExitEvent.Invoke();
+            _exited = _oneShot;
         }
     }
 }
