@@ -11,7 +11,9 @@ public class EnemyController : MonoBehaviour
     [SerializeField] float _timeOfLoseSight;
     [SerializeField] float _groundDetectDistance;
     [SerializeField] float _canGroundedAngle;
+    [Tooltip("Ëü‚ª’Ê‚Á‚Ä‚È‚¢‚ÆŒŸ’m‚µ‚È‚¢")]
     [SerializeField] bool _needSeenForDetection;
+    [Tooltip("‚»‚Ìê‚©‚ç“®‚©‚È‚¢")]
     [SerializeField] bool _notMoving;
     Transform _player;
     Rigidbody _rb;
@@ -19,6 +21,11 @@ public class EnemyController : MonoBehaviour
     Coroutine _currentCoroutine;
     float _playerUnDetectedTime;
     bool _playerDetected;
+
+    public void ChangeDetectDistance(float newDistance)
+    {
+        _playerDetectDistance = newDistance;
+    }
 
     void Start()
     {

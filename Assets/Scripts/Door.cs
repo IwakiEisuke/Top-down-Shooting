@@ -15,14 +15,14 @@ public class Door : MonoBehaviour
 
     public void Open()
     {
-        _blocker.enabled = true;
+        if (_blocker) _blocker.enabled = true;
         _targetPos += Vector3.up * _moveY;
         transform.DOMoveY(_targetPos.y, _duration);
     }
 
     public void Close()
     {
-        _blocker.enabled = false;
+        if (_blocker) _blocker.enabled = false;
         _targetPos += Vector3.down * _moveY;
         transform.DOMoveY(_targetPos.y, _duration);
     }
