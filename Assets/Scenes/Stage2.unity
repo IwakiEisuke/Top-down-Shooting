@@ -4442,6 +4442,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4707618267981539780, guid: fbbb48f2283fa734f998183626bef398, type: 3}
+      propertyPath: m_Radius
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7076901204966423310, guid: fbbb48f2283fa734f998183626bef398, type: 3}
       propertyPath: m_LocalPosition.x
       value: 113.49455
@@ -4485,6 +4489,10 @@ PrefabInstance:
     - target: {fileID: 7446530456140525987, guid: fbbb48f2283fa734f998183626bef398, type: 3}
       propertyPath: m_Name
       value: NormalShooter
+      objectReference: {fileID: 0}
+    - target: {fileID: 9045617406435963373, guid: fbbb48f2283fa734f998183626bef398, type: 3}
+      propertyPath: _notBackwards
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14390,6 +14398,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4707618267981539780, guid: fbbb48f2283fa734f998183626bef398, type: 3}
+      propertyPath: m_Radius
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7076901204966423310, guid: fbbb48f2283fa734f998183626bef398, type: 3}
       propertyPath: m_LocalPosition.x
       value: 117.58
@@ -14433,6 +14445,10 @@ PrefabInstance:
     - target: {fileID: 7446530456140525987, guid: fbbb48f2283fa734f998183626bef398, type: 3}
       propertyPath: m_Name
       value: NormalShooter (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9045617406435963373, guid: fbbb48f2283fa734f998183626bef398, type: 3}
+      propertyPath: _notBackwards
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -45066,6 +45082,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4707618267981539780, guid: fbbb48f2283fa734f998183626bef398, type: 3}
+      propertyPath: m_Radius
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7076901204966423310, guid: fbbb48f2283fa734f998183626bef398, type: 3}
       propertyPath: m_LocalPosition.x
       value: 121.49
@@ -45109,6 +45129,10 @@ PrefabInstance:
     - target: {fileID: 7446530456140525987, guid: fbbb48f2283fa734f998183626bef398, type: 3}
       propertyPath: m_Name
       value: NormalShooter (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9045617406435963373, guid: fbbb48f2283fa734f998183626bef398, type: 3}
+      propertyPath: _notBackwards
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

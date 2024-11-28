@@ -19,6 +19,9 @@ public class EnemyController : MonoBehaviour
     [SerializeField] bool _flying;
     [SerializeField] float _flyingBouncy;
     [SerializeField] float _cycleTime;
+    [SerializeField] float _stoppingDistance;
+    [Tooltip("後退しない")]
+    [SerializeField] bool _notBackwards;
     float _initialBaseOffset;
     Transform _player;
     Rigidbody _rb;
@@ -75,6 +78,18 @@ public class EnemyController : MonoBehaviour
             // フワフワ浮かせる
             _agent.baseOffset = _initialBaseOffset + Mathf.Cos(2 * Mathf.PI * Time.time / _cycleTime) * _flyingBouncy;
             NextState();
+
+            var distance = (_player.transform.position - transform.position).magnitude;
+
+            if (CheckPassPlayer() && distance < _stoppingDistance)
+            {
+                // エージェントのブレーキを使って停止させる
+                _agent.stoppingDistance = 1000000;
+            }
+            else
+            {
+                _agent.stoppingDistance = 0;
+            }
         }
         else // 飛んでいない場合、地面検知を行う
         {
@@ -118,7 +133,23 @@ public class EnemyController : MonoBehaviour
         moveDir.y = 0;
         moveDir = Quaternion.Euler(0, Random.Range(-120, 120), 0) * moveDir;
         moveDir.Normalize();
-        var target = transform.position + moveDir * _speed;
+        var target = Vector3.zero;
+
+        if (_notBackwards)
+        {
+            if (CheckPassPlayer() && (_player.transform.position - transform.position).sqrMagnitude < _stoppingDistance * _stoppingDistance)
+            {
+                target = transform.position;
+            }
+            else
+            {
+                target = _player.transform.position;
+            }
+        }
+        else
+        {
+            target = transform.position + moveDir * _speed;
+        }
 
         yield return new WaitUntil(() => _playerDetected);
         if(_agent.isOnNavMesh) _agent.destination = target;

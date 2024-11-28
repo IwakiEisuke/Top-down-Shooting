@@ -20,6 +20,10 @@ PrefabInstance:
       propertyPath: m_AgentTypeID
       value: -902729914
       objectReference: {fileID: 0}
+    - target: {fileID: 4707618267981539780, guid: fbbb48f2283fa734f998183626bef398, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7076901204966423310, guid: fbbb48f2283fa734f998183626bef398, type: 3}
       propertyPath: m_LocalPosition.x
       value: 120.41
@@ -75,6 +79,14 @@ PrefabInstance:
     - target: {fileID: 9045617406435963373, guid: fbbb48f2283fa734f998183626bef398, type: 3}
       propertyPath: _flyingBouncy
       value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9045617406435963373, guid: fbbb48f2283fa734f998183626bef398, type: 3}
+      propertyPath: _notBackwards
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9045617406435963373, guid: fbbb48f2283fa734f998183626bef398, type: 3}
+      propertyPath: _stoppingDistance
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 9045617406435963373, guid: fbbb48f2283fa734f998183626bef398, type: 3}
       propertyPath: _playerDetectDistance
