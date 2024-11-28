@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float _speed = 10;
     [SerializeField] float _jumpForce = 10;
     [SerializeField] int _jumpCount = 2;
+    [SerializeField] LayerMask _canGroundedLayer;
 
     Vector3 _input;
     Rigidbody _rb;
@@ -35,7 +36,7 @@ public class PlayerController : MonoBehaviour
 
         if (_rb.linearVelocity.y <= 0)
         {
-            if (Physics.BoxCast(_renderer.bounds.center + Vector3.up * stepHeight, extents, Vector3.down, Quaternion.identity, halfExtent + stepHeight))
+            if (Physics.BoxCast(_renderer.bounds.center + Vector3.up * stepHeight, extents, Vector3.down, Quaternion.identity, halfExtent + stepHeight, _canGroundedLayer))
             {
                 _currJumpCount = 0;
             }
