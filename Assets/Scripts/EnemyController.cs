@@ -15,6 +15,11 @@ public class EnemyController : MonoBehaviour
     [SerializeField] bool _needSeenForDetection;
     [Tooltip("その場から動かない")]
     [SerializeField] bool _notMoving;
+    [Tooltip("落下しない")]
+    [SerializeField] bool _flying;
+    [SerializeField] float _flyingBouncy;
+    [SerializeField] float _cycleTime;
+    float _initialBaseOffset;
     Transform _player;
     Rigidbody _rb;
     NavMeshAgent _agent;
@@ -34,6 +39,7 @@ public class EnemyController : MonoBehaviour
         _agent = _rb.GetComponent<NavMeshAgent>();
         _currentCoroutine = StartCoroutine(Attack());
         if (_notMoving) _agent.enabled = false;
+        _initialBaseOffset = _agent.baseOffset;
     }
 
     private void Update()
@@ -64,7 +70,13 @@ public class EnemyController : MonoBehaviour
             // 攻撃などの動作は行う
             NextState();
         }
-        else
+        else if (_flying)
+        {
+            // フワフワ浮かせる
+            _agent.baseOffset = _initialBaseOffset + Mathf.Cos(2 * Mathf.PI * Time.time / _cycleTime) * _flyingBouncy;
+            NextState();
+        }
+        else // 飛んでいない場合、地面検知を行う
         {
             if (_agent.isOnNavMesh)
             {
