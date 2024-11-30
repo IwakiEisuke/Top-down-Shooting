@@ -43525,66 +43525,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1370435961064276137, guid: b1fb68dfaed05c04f9f34db1d6c608cc, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1370435961064276137, guid: b1fb68dfaed05c04f9f34db1d6c608cc, type: 3}
-      propertyPath: _bulletPref
-      value: 
-      objectReference: {fileID: 5807220881213474616, guid: 721ddc61be5330944be9219e99204d20, type: 3}
-    - target: {fileID: 3012605782189770941, guid: b1fb68dfaed05c04f9f34db1d6c608cc, type: 3}
-      propertyPath: _assist
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3386125883717118775, guid: b1fb68dfaed05c04f9f34db1d6c608cc, type: 3}
       propertyPath: _hpSlider
       value: 
       objectReference: {fileID: 1084093424}
-    - target: {fileID: 3386125883717118775, guid: b1fb68dfaed05c04f9f34db1d6c608cc, type: 3}
-      propertyPath: _invincible
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3670255980668613487, guid: b1fb68dfaed05c04f9f34db1d6c608cc, type: 3}
-      propertyPath: _speed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3670255980668613487, guid: b1fb68dfaed05c04f9f34db1d6c608cc, type: 3}
-      propertyPath: _canGroundedLayer.m_Bits
-      value: 8127
-      objectReference: {fileID: 0}
-    - target: {fileID: 5343210671958870318, guid: b1fb68dfaed05c04f9f34db1d6c608cc, type: 3}
-      propertyPath: m_Drag
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5343210671958870318, guid: b1fb68dfaed05c04f9f34db1d6c608cc, type: 3}
-      propertyPath: m_Mass
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5343210671958870318, guid: b1fb68dfaed05c04f9f34db1d6c608cc, type: 3}
-      propertyPath: m_UseGravity
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5343210671958870318, guid: b1fb68dfaed05c04f9f34db1d6c608cc, type: 3}
-      propertyPath: m_AngularDrag
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 5343210671958870318, guid: b1fb68dfaed05c04f9f34db1d6c608cc, type: 3}
-      propertyPath: m_Constraints
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 5343210671958870318, guid: b1fb68dfaed05c04f9f34db1d6c608cc, type: 3}
-      propertyPath: m_Interpolate
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5343210671958870318, guid: b1fb68dfaed05c04f9f34db1d6c608cc, type: 3}
-      propertyPath: m_IsKinematic
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5343210671958870318, guid: b1fb68dfaed05c04f9f34db1d6c608cc, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 7850331744789865793, guid: b1fb68dfaed05c04f9f34db1d6c608cc, type: 3}
       propertyPath: m_Name
       value: Player
