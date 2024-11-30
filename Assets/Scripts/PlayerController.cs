@@ -14,6 +14,9 @@ public class PlayerController : MonoBehaviour
     int _currJumpCount;
 
     Vector3 _respawnPoint;
+    Vector3 _externalVelocity;
+    Vector3 _angularVelocity;
+    Vector3 _jumpVelocity;
 
     private void Start()
     {
@@ -22,9 +25,17 @@ public class PlayerController : MonoBehaviour
         _renderer = GetComponent<Renderer>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        _rb.linearVelocity = _input * _speed + new Vector3(0, _rb.linearVelocity.y, 0);
+        _externalVelocity = Vector3.Lerp(_externalVelocity, Vector3.zero, 5 * Time.fixedDeltaTime);
+        _angularVelocity = Vector3.Lerp(_angularVelocity, Vector3.zero, 5 * Time.fixedDeltaTime);
+        _jumpVelocity += Physics.gravity * Time.fixedDeltaTime;
+
+        var inputVelocity = _input * _speed;
+
+        _rb.linearVelocity = inputVelocity + _externalVelocity + _jumpVelocity;
+        Debug.Log(_rb.linearVelocity);
+        //_rb.angularVelocity += _angularVelocity;
     }
 
     private void OnCollisionStay(Collision collision)
@@ -39,8 +50,36 @@ public class PlayerController : MonoBehaviour
             if (Physics.BoxCast(_renderer.bounds.center + Vector3.up * stepHeight, extents, Vector3.down, Quaternion.identity, halfExtent + stepHeight, _canGroundedLayer))
             {
                 _currJumpCount = 0;
+                _jumpVelocity = Vector3.zero;
             }
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.rigidbody)
+        {
+            // ê¸ë¨ìxåvéZ
+            _externalVelocity += -collision.impulse / _rb.mass;
+
+            // äpë¨ìxåvéZ
+            var contact = collision.contacts[0];
+            var torque = Vector3.Cross(contact.point - transform.position, -collision.impulse);
+            _rb.ResetInertiaTensor();
+            var I = _rb.inertiaTensor;
+
+            torque = Quaternion.FromToRotation(collision.impulse, Vector3.up).eulerAngles;
+
+            _angularVelocity += Vector3.Scale(torque, Reciprocal(I));
+        }
+    }
+
+    private Vector3 Reciprocal(Vector3 v)
+    {
+        return new Vector3(
+            v.x != 0 ? 1f / v.x : 0, 
+            v.y != 0 ? 1f / v.y : 0, 
+            v.z != 0 ? 1f / v.z : 0);
     }
 
 
@@ -58,7 +97,7 @@ public class PlayerController : MonoBehaviour
     {
         if (_currJumpCount < _jumpCount)
         {
-            _rb.linearVelocity = new Vector3(_rb.linearVelocity.x, _jumpForce, _rb.linearVelocity.z);
+            _jumpVelocity = Vector3.up * _jumpForce;
             _currJumpCount++;
         }
     }
