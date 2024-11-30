@@ -10,11 +10,13 @@ public class TransparentCeil : MonoBehaviour
     [SerializeField] float _endAlpha;
     [SerializeField] float _transitionTime;
     Material _material;
-    Renderer _ceilMesh;
 
-    private void Reset()
+    private void Start()
     {
-        Set();
+        _material = GetComponent<Renderer>().sharedMaterial;
+        var c = _material.color;
+        c.a = 1;
+        _material.color = c;
     }
 
     [ContextMenu(nameof(Set))]
@@ -32,7 +34,6 @@ public class TransparentCeil : MonoBehaviour
 
     private void ChangeAlpha(float alpha)
     {
-        _material = _ceilMesh.material;
         var newColor = _material.color;
         newColor.a = alpha;
         _material.DOColor(newColor, _transitionTime);
@@ -46,6 +47,11 @@ public class TransparentCeil : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         ChangeAlpha(_startAlpha);
+    }
+
+    private void Reset()
+    {
+        Set();
     }
 
     private void OnValidate()
