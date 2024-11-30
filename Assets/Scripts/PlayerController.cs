@@ -1,45 +1,46 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : ControllerBase
 {
     [SerializeField] float _speed = 10;
     [SerializeField] float _jumpForce = 10;
     [SerializeField] int _jumpCount = 2;
     [SerializeField] LayerMask _canGroundedLayer;
-
     Vector3 _input;
-    Rigidbody _rb;
+    Vector3 _respawnPoint;
+    Vector3 _jumpVelocity;
     Renderer _renderer;
     int _currJumpCount;
 
-    Vector3 _respawnPoint;
-    Vector3 _externalVelocity;
-    Vector3 _angularVelocity;
-    Vector3 _jumpVelocity;
-
     private void Start()
     {
-        _rb = GetComponent<Rigidbody>();
         _respawnPoint = transform.position;
+        _rb = GetComponent<Rigidbody>();
         _renderer = GetComponent<Renderer>();
     }
 
-    private void FixedUpdate()
+    protected override void VelocityDecay()
     {
-        _externalVelocity = Vector3.Lerp(_externalVelocity, Vector3.zero, 5 * Time.fixedDeltaTime);
-        _angularVelocity = Vector3.Lerp(_angularVelocity, Vector3.zero, 5 * Time.fixedDeltaTime);
+        base.VelocityDecay();
         _jumpVelocity += Physics.gravity * Time.fixedDeltaTime;
+    }
 
+    protected override Vector3 Move()
+    {
+        _jumpVelocity += Physics.gravity * Time.fixedDeltaTime;
         var inputVelocity = _input * _speed;
+        return inputVelocity + _externalVelocity + _jumpVelocity;
+    }
 
-        _rb.linearVelocity = inputVelocity + _externalVelocity + _jumpVelocity;
-        Debug.Log(_rb.linearVelocity);
-        //_rb.angularVelocity += _angularVelocity;
+    protected override Vector3 Rotate()
+    {
+        return _angularVelocity;
     }
 
     private void OnCollisionStay(Collision collision)
     {
+        // ê⁄ínîªíË
         var stepHeight = 0.1f;
         var halfExtent = 0.5f;
         var extentMargin = 0.05f;
@@ -54,34 +55,6 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.rigidbody)
-        {
-            // ê¸ë¨ìxåvéZ
-            _externalVelocity += -collision.impulse / _rb.mass;
-
-            // äpë¨ìxåvéZ
-            var contact = collision.contacts[0];
-            var torque = Vector3.Cross(contact.point - transform.position, -collision.impulse);
-            _rb.ResetInertiaTensor();
-            var I = _rb.inertiaTensor;
-
-            torque = Quaternion.FromToRotation(collision.impulse, Vector3.up).eulerAngles;
-
-            _angularVelocity += Vector3.Scale(torque, Reciprocal(I));
-        }
-    }
-
-    private Vector3 Reciprocal(Vector3 v)
-    {
-        return new Vector3(
-            v.x != 0 ? 1f / v.x : 0, 
-            v.y != 0 ? 1f / v.y : 0, 
-            v.z != 0 ? 1f / v.z : 0);
-    }
-
 
     /*
      *     inputs
