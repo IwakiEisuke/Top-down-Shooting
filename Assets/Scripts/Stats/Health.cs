@@ -7,9 +7,9 @@ using UnityEngine.Events;
 public class Health : MonoBehaviour, IDamageable, IHealth
 {
     [SerializeField] int _maxHealth = 5;
-    [SerializeField] UnityEvent onTakeDamage;
-    [SerializeField] UnityEvent onHeal;
-    [SerializeField] UnityEvent onDie;
+    public UnityEvent onTakeDamage;
+    public UnityEvent onHeal;
+    public UnityEvent onDie;
     int _health = 5;
 
     private void Awake()
