@@ -171,7 +171,7 @@ GameObject:
   - component: {fileID: 1336294692297674680}
   - component: {fileID: 3670255980668613487}
   - component: {fileID: 1370435961064276137}
-  - component: {fileID: 3386125883717118775}
+  - component: {fileID: 3102819913195263950}
   - component: {fileID: 5343210671958870318}
   - component: {fileID: 6566870122794944251}
   - component: {fileID: 3454079395575690097}
@@ -236,7 +236,7 @@ MonoBehaviour:
   _angleRandomness: 0
   _doRandomizeXAxisRotation: 0
   _pointer: {fileID: 3012605782189770941}
---- !u!114 &3386125883717118775
+--- !u!114 &3102819913195263950
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -245,13 +245,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 7850331744789865793}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53941b175a417e740b48886807d63bb6, type: 3}
+  m_Script: {fileID: 11500000, guid: 41a170f60be86d242a416b438a2f6cc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHP: 5
-  _invincible: 1
-  _hpSlider: {fileID: 0}
-  _hpSprite: {fileID: 2800000, guid: 6678bd0ba71a6da459d47ea11904747d, type: 3}
+  _maxHealth: 5
+  onTakeDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  onHeal:
+    m_PersistentCalls:
+      m_Calls: []
+  onDie:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7850331744789865793}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!54 &5343210671958870318
 Rigidbody:
   m_ObjectHideFlags: 0
