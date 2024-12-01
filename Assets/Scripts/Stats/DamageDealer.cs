@@ -1,14 +1,19 @@
 using UnityEngine;
 
+/// <summary>
+/// IDamageableが実装されているクラスにダメージを与える
+/// </summary>
 public class DamageDealer : MonoBehaviour
 {
     [SerializeField] int damageAmount = 1;
 
     void DealDamage(GameObject target)
     {
-        foreach (var d in target.GetComponents<IDamageable>())
+        foreach (var damageable in target.GetComponents<IDamageable>())
         {
-            d.TakeDamage(damageAmount);
+            var behaviour = damageable as MonoBehaviour;
+            if (behaviour.enabled)
+                damageable.TakeDamage(damageAmount);
         }
     }
 
