@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 /// <summary>
-/// 体力が無くなると死亡する体力コンポーネント
+/// 体力を管理するコンポーネント
 /// </summary>
 public class Health : MonoBehaviour, IDamageable, IHealth
 {

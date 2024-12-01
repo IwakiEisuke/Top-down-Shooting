@@ -21,7 +21,7 @@ public class Bullet : MonoBehaviour
     {
         if (collision.rigidbody)
         {
-            Debug.Log($"b : {collision.rigidbody.mass} {collision.impulse} {collision.relativeVelocity}");
+            //Debug.Log($"b : {collision.rigidbody.mass} {collision.impulse} {collision.relativeVelocity}");
             collision.rigidbody.AddForce(-collision.impulse, ForceMode.Impulse);
         }
 
