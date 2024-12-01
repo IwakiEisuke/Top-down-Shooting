@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class ColliderEventHandler : MonoBehaviour
+public class TriggerHandler : MonoBehaviour
 {
     [SerializeField] bool _oneShot = true;
     [SerializeField] UnityEvent OnTriggerEnterEvent;

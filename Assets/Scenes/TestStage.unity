@@ -1742,7 +1742,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e09710b9bb0060442bdb91f65f27ca33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 10
 --- !u!4 &943461790 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1288756652190065608, guid: 3aea2d75b31a08a46902be5e4a022be3, type: 3}
@@ -11567,7 +11566,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.06666667
+  m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 4a931297404be3546827cc6f2e072df5, type: 2}
   m_BuildHeightMesh: 0

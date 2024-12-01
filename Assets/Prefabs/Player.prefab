@@ -157,7 +157,7 @@ MonoBehaviour:
     m_Bits: 819
   _muzzle: {fileID: 1279741543672290335}
   _maxDistance: 100
-  _assist: 0
+  _assist: 1
   _yAssistRange: 0.5
   _distanceToGround: 0.5
 --- !u!1 &7850331744789865793
