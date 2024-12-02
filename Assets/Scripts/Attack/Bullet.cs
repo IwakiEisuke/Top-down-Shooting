@@ -3,7 +3,6 @@ using UnityEngine.AI;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] int _damage = 1;
     [SerializeField] float _existDuration = 10f;
     [SerializeField] bool _destroyOnCollide;
     [SerializeField] LayerMask _reflects;
@@ -28,17 +27,6 @@ public class Bullet : MonoBehaviour
         if (collision.gameObject.TryGetComponent<NavMeshAgent>(out var agent) && collision.gameObject.TryGetComponent<AgentSettings>(out var settings))
         {
             agent.velocity -= collision.impulse / collision.rigidbody.mass / settings.LinearDrag;
-        }
-
-        // Šù‚É‰½‚©‚µ‚ç‚Éƒ_ƒ[ƒW‚ğ—^‚¦‚Ä‚¢‚½‚çUŒ‚‚Å‚«‚È‚¢
-        if (!_isAttacked && collision.gameObject.TryGetComponent<StatsManager>(out var stats))
-        {
-            if (_rb.linearVelocity.sqrMagnitude > 10) // ˆê’è‘¬“x‚ğ‚Á‚Ä‚¢‚È‚¯‚ê‚ÎUŒ‚‚Å‚«‚È‚¢
-            {
-                stats.DealDamage(_damage);
-                _isAttacked = true;
-                DestroyBullet();
-            }
         }
 
         // ’µ’eˆ—
