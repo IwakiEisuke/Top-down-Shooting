@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PointerC : MonoBehaviour
+public class GunPointer : MonoBehaviour
 {
     [SerializeField] LayerMask _layerMask;
     [SerializeField] Transform _muzzle;
