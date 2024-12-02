@@ -1,5 +1,6 @@
-public interface IHealth : IDamageable
+public interface IHealth
 {
+    void Damage(int damage);
     void Heal(int amount);
     void Death();
     int GetHealth();
