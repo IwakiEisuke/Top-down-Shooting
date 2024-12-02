@@ -13,7 +13,7 @@ public class DamageDealer : MonoBehaviour
         {
             var behaviour = damageable as MonoBehaviour;
             if (behaviour.enabled)
-                damageable.TakeDamage(damageAmount);
+                damageable.Damage(damageAmount);
         }
     }
 

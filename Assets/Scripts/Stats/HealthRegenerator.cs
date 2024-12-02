@@ -15,7 +15,7 @@ public class HealthRegenerator : MonoBehaviour, IDamageable
         InvokeRepeating(nameof(Regeneration), _regenDelay, 1 / _regenSpeed);
     }
 
-    public void TakeDamage(int damage)
+    public void Damage(int damage)
     {
         CancelInvoke();
         InvokeRepeating(nameof(Regeneration), _regenDelay, 1 / _regenSpeed);

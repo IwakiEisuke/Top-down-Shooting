@@ -4,7 +4,7 @@ using UnityEngine.Events;
 /// <summary>
 /// 体力を管理するコンポーネント
 /// </summary>
-public class Health : MonoBehaviour, IDamageable, IHealth
+public class Health : MonoBehaviour, IHealth
 {
     [SerializeField] int _maxHealth = 5;
     public UnityEvent onTakeDamage;
@@ -17,12 +17,12 @@ public class Health : MonoBehaviour, IDamageable, IHealth
         _health = _maxHealth;
     }
 
-    public void TakeDamage(int damage)
+    public void Damage(int damage)
     {
         _health -= damage;
         onTakeDamage.Invoke();
 
-        if (_health <= 0) Die();
+        if (_health <= 0) Death();
     }
 
     public void Heal(int amount)
@@ -33,7 +33,7 @@ public class Health : MonoBehaviour, IDamageable, IHealth
         if (_health > _maxHealth) _health = _maxHealth;
     }
 
-    private void Die()
+    public void Death()
     {
         onDie.Invoke();
     }

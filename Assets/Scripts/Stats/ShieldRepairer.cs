@@ -18,7 +18,7 @@ public class ShieldRepairer : MonoBehaviour, IDamageable
         enabled = false;
     }
 
-    public void TakeDamage(int damage)
+    public void Damage(int damage)
     {
         CancelInvoke();
         Invoke(nameof(Repair), _rebuildDelay);
