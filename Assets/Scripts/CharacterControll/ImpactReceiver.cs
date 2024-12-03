@@ -1,37 +1,26 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
-public class ControllerBase : MonoBehaviour
+public class ImpactReceiver : MonoBehaviour
 {
-    protected Rigidbody _rb;
-    protected Vector3 _externalVelocity;
-    protected Vector3 _angularVelocity;
+    [SerializeField] RigidbodyController _controller;
+    Rigidbody _rb;
+    Vector3 _externalVelocity;
+    Vector3 _angularVelocity;
 
     private void Start()
     {
-        _rb = GetComponent<Rigidbody>();
+        _rb = _controller.GetComponent<Rigidbody>();
     }
     private void FixedUpdate()
     {
         VelocityDecay();
-        _rb.linearVelocity = Move();
-        _rb.angularVelocity += Rotate();
+        _controller.AddVelocity(_externalVelocity, _angularVelocity);
     }
 
-    protected virtual void VelocityDecay()
+    private void VelocityDecay()
     {
         _externalVelocity *= 1 - _rb.linearDamping * Time.fixedDeltaTime;
         _angularVelocity *= 1 - _rb.angularDamping * Time.fixedDeltaTime;
-    }
-
-    protected virtual Vector3 Move()
-    {
-        return _externalVelocity;
-    }
-
-    protected virtual Vector3 Rotate()
-    {
-        return _angularVelocity;
     }
 
     private void OnCollisionEnter(Collision collision)
