@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7076901204966423310}
-  - component: {fileID: 1287979483961837750}
+  - component: {fileID: 9097843237173005379}
+  - component: {fileID: 8943905771905317467}
   - component: {fileID: 9045617406435963373}
   - component: {fileID: 9139415468450241765}
   - component: {fileID: 4707618267981539780}
@@ -40,7 +41,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1287979483961837750
+--- !u!114 &9097843237173005379
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -49,11 +50,43 @@ MonoBehaviour:
   m_GameObject: {fileID: 7446530456140525987}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11becae0b7c2f6a45a161367ccdf4b4a, type: 3}
+  m_Script: {fileID: 11500000, guid: 41a170f60be86d242a416b438a2f6cc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHP: 5
-  _invincible: 0
+  _maxHealth: 5
+  onTakeDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  onHeal:
+    m_PersistentCalls:
+      m_Calls: []
+  onDie:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7446530456140525987}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &8943905771905317467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7446530456140525987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccdc0e3326cd98b46b414df4e6f7ab7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &9045617406435963373
 MonoBehaviour:
   m_ObjectHideFlags: 0
