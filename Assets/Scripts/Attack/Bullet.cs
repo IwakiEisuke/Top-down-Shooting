@@ -18,17 +18,6 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.rigidbody)
-        {
-            //Debug.Log($"b : {collision.rigidbody.mass} {collision.impulse} {collision.relativeVelocity}");
-            collision.rigidbody.AddForce(-collision.impulse, ForceMode.Impulse);
-        }
-
-        if (collision.gameObject.TryGetComponent<NavMeshAgent>(out var agent) && collision.gameObject.TryGetComponent<AgentSettings>(out var settings))
-        {
-            agent.velocity -= collision.impulse / collision.rigidbody.mass / settings.LinearDrag;
-        }
-
         // ’µ’eˆ—
         // layerMask‚Í‰½Œ…–Ú‚É1‚ª‚ ‚é‚©AgameObject.layer‚ÍƒŒƒCƒ„[”Ô†‚»‚Ì‚Ü‚Ü‚Ì®”
         if ((_reflects &= 1 << collision.gameObject.layer) != 0)
