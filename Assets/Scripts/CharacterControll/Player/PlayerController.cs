@@ -4,30 +4,68 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] Renderer _model;
-    [SerializeField] RigidbodyController _controller;
-    [SerializeField] float _speed = 10;
+    [SerializeField] LayerMask _canGroundedLayer;
+
+    [Header("Jump")]
     [SerializeField] float _jumpForce = 10;
     [SerializeField] int _jumpCount = 2;
-    [SerializeField] LayerMask _canGroundedLayer;
+    [SerializeField] float _gravityScale = 1;
+
+    [Header("Move")]
+    [SerializeField] float _speed = 10;
+    [SerializeField] float _maxAccel = 150;
+    [SerializeField] float _maxVerticalAccel = 150;
+    [SerializeField] float _maxFallVelocity = 30;
+
     Rigidbody _rb;
     Vector3 _input;
     Vector3 _respawnPoint;
-    Vector3 _jumpVelocity;
     int _currJumpCount;
+    bool _isGrounded;
 
     private void Start()
     {
         _respawnPoint = transform.position;
-        _rb = _controller.GetComponent<Rigidbody>();
+        _rb = GetComponent<Rigidbody>();
     }
 
     void FixedUpdate()
     {
-        _jumpVelocity += Physics.gravity * Time.fixedDeltaTime;
-        _controller.AddVelocity(_input * _speed + _jumpVelocity, Vector3.zero);
+        var goalVel = _input * _speed;
+        var currHVel = new Vector3(_rb.linearVelocity.x, 0, _rb.linearVelocity.z);
+        var currVVel = Vector3.up * _rb.linearVelocity.y;
+
+        var newHVel = Vector3.MoveTowards(currHVel, goalVel, _maxAccel * Time.fixedDeltaTime);
+        var newVVel = Vector3.MoveTowards(currVVel, Physics.gravity * _maxFallVelocity, _maxVerticalAccel * Time.fixedDeltaTime);
+        if (_isGrounded) newVVel = Physics.gravity * Time.fixedDeltaTime;
+
+        _rb.linearVelocity = newHVel + newVVel;
     }
 
     private void OnCollisionStay(Collision collision)
+    {
+        if (IsGrounded())
+        {
+            _currJumpCount = 0;
+            _isGrounded = true;
+        }
+    }
+
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (IsGrounded())
+    //    {
+    //        _currJumpCount = 0;
+    //        _isGrounded = true;
+    //    }
+    //}
+
+    private void OnCollisionExit(Collision collision)
+    {
+        _isGrounded = false;
+    }
+
+    private bool IsGrounded()
     {
         // ê⁄ínîªíË
         var stepHeight = 0.1f;
@@ -39,10 +77,11 @@ public class PlayerController : MonoBehaviour
         {
             if (Physics.BoxCast(_model.bounds.center + Vector3.up * stepHeight, extents, Vector3.down, Quaternion.identity, halfExtent + stepHeight, _canGroundedLayer))
             {
-                _currJumpCount = 0;
-                _jumpVelocity = Vector3.zero;
+                return true;
             }
         }
+
+        return false;
     }
 
     /*
@@ -59,13 +98,15 @@ public class PlayerController : MonoBehaviour
     {
         if (_currJumpCount < _jumpCount)
         {
-            _jumpVelocity = Vector3.up * _jumpForce;
+            _rb.linearVelocity += Vector3.up * (_jumpForce - _rb.linearVelocity.y);
             _currJumpCount++;
+            _isGrounded = false;
         }
     }
 
     private void OnRestart(InputValue value)
     {
-        transform.position = _respawnPoint;
+        _rb.linearVelocity = Vector3.zero;
+        _rb.MovePosition(_respawnPoint);
     }
 }
