@@ -43,6 +43,7 @@ public class EnemyController : MonoBehaviour
         _currentCoroutine = StartCoroutine(Attack());
         if (_notMoving) _agent.enabled = false;
         _initialBaseOffset = _agent.baseOffset;
+        _notMoving = !_agent.isOnNavMesh;
     }
 
     private void Update()

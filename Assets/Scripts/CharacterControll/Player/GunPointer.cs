@@ -11,12 +11,12 @@ public class GunPointer : MonoBehaviour
     [SerializeField] float _yAssistRange = 0.5f;
     [SerializeField] float _distanceToGround = 0.5f;
 
-    LineRenderer _line;
-
     /// <summary>
     /// 終端位置
     /// </summary>
     public Vector3 HitPosition { get; private set; }
+
+    LineRenderer _line;
 
     private void Start()
     {
@@ -26,18 +26,21 @@ public class GunPointer : MonoBehaviour
     void Update()
     {
         _line.SetPosition(0, _muzzle.transform.position);
-
         Ray cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(cameraRay, out var cameraHit, float.MaxValue, _layerMask)) // マウス位置にレイを飛ばす
+        if (Physics.Raycast(cameraRay, out var cameraHit, float.MaxValue, _layerMask)) // カメラからマウス位置にレイを飛ばす
         {
-            SetPoint(cameraHit.point);
-            
-            if (_assist && Mathf.Abs(transform.position.y - _distanceToGround - cameraHit.point.y) < _yAssistRange)
+            // 自分以外のダメージを受け取るオブジェクトの場合アシストの影響を受けない
+            if (cameraHit.transform != this.transform && cameraHit.collider.GetComponent<IDamageable>() != null)
             {
-                var targetPos = cameraHit.point;
-                targetPos.y = transform.position.y;
-                SetPoint(targetPos);
+                SetPoint(cameraHit.point);
+            }
+            // マウス位置の高さがプレイヤーの目線から立っている地面までの間にある場合高さをプレイヤーの目線にする
+            else if (_assist && Mathf.Abs(transform.position.y - _distanceToGround - cameraHit.point.y) < _yAssistRange)
+            {
+                var assistedPos = cameraHit.point;
+                assistedPos.y = transform.position.y;
+                SetPoint(assistedPos);
             }
             else
             {
@@ -53,10 +56,15 @@ public class GunPointer : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// プレイヤー位置からターゲットにレイを飛ばし、衝突からポインターの終点位置を決定する
+    /// </summary>
+    /// <param name="target"></param>
     void SetPoint(Vector3 target)
     {
+        // プレイヤー位置からターゲットにレイを飛ばす
         Ray lineRay = new(_muzzle.transform.position, target - _muzzle.transform.position);
-        if (Physics.Raycast(lineRay, out var lineHit, _maxDistance, _layerMask)) // プレイヤー位置からターゲットにレイを飛ばす
+        if (Physics.Raycast(lineRay, out var lineHit, _maxDistance, _layerMask))
         {
             // レイが当たればその位置を終端にする
             HitPosition = lineHit.point;

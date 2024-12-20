@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -3461259381116324316, guid: d455983de4c3224449ee91c817e446bc, type: 3}
       propertyPath: _knockbackTime
-      value: 0.7
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1207799746118600021, guid: d455983de4c3224449ee91c817e446bc, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -18,11 +18,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 4295916827f90284baf72a3882c7ca2e, type: 2}
     - target: {fileID: 6260940122019472227, guid: d455983de4c3224449ee91c817e446bc, type: 3}
       propertyPath: m_Name
-      value: SniperBullet
+      value: FastBullet
       objectReference: {fileID: 0}
     - target: {fileID: 8064989092142547943, guid: d455983de4c3224449ee91c817e446bc, type: 3}
       propertyPath: m_Mass
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8064989092142547943, guid: d455983de4c3224449ee91c817e446bc, type: 3}
       propertyPath: m_ExcludeLayers.m_Bits

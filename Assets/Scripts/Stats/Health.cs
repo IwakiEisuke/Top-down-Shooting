@@ -7,7 +7,9 @@ using UnityEngine.Events;
 public class Health : MonoBehaviour, IHealth
 {
     [SerializeField] int _maxHealth = 5;
-    public UnityEvent onTakeDamage;
+
+    [Space(16)]
+    public UnityEvent onDamage;
     public UnityEvent onHeal;
     public UnityEvent onDie;
     int _health = 5;
@@ -19,8 +21,10 @@ public class Health : MonoBehaviour, IHealth
 
     public void Damage(int damage)
     {
+        if (!enabled) return;
+
         _health -= damage;
-        onTakeDamage.Invoke();
+        onDamage.Invoke();
 
         if (_health <= 0) Death();
     }

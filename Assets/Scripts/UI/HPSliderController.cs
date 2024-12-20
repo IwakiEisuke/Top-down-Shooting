@@ -9,7 +9,7 @@ public class HPSliderController : MonoBehaviour
 
     private void Start()
     {
-        _health.onTakeDamage.AddListener(() => UpdateHPSlider());
+        _health.onDamage.AddListener(() => UpdateHPSlider());
         _health.onHeal.AddListener(() => UpdateHPSlider());
 
         // スライダー初期化
