@@ -25814,36 +25814,64 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3102819913195263950, guid: b1fb68dfaed05c04f9f34db1d6c608cc, type: 3}
-      propertyPath: m_Enabled
-      value: 0
+      propertyPath: _maxHealth
+      value: 100
       objectReference: {fileID: 0}
-    - target: {fileID: 4309660736916826002, guid: b1fb68dfaed05c04f9f34db1d6c608cc, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
     - target: {fileID: 4309660736916826002, guid: b1fb68dfaed05c04f9f34db1d6c608cc, type: 3}
       propertyPath: m_Pivot.y
-      value: -0.5
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4309660736916826002, guid: b1fb68dfaed05c04f9f34db1d6c608cc, type: 3}
-      propertyPath: m_RenderMode
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4309660736916826002, guid: b1fb68dfaed05c04f9f34db1d6c608cc, type: 3}
-      propertyPath: m_RenderAlignment
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4309660736916826002, guid: b1fb68dfaed05c04f9f34db1d6c608cc, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 7850331744789865793, guid: b1fb68dfaed05c04f9f34db1d6c608cc, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8026004615364126438, guid: b1fb68dfaed05c04f9f34db1d6c608cc, type: 3}
+      propertyPath: particleSpeed
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092813491136772813, guid: b1fb68dfaed05c04f9f34db1d6c608cc, type: 3}
+      propertyPath: ShapeModule.type
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092813491136772813, guid: b1fb68dfaed05c04f9f34db1d6c608cc, type: 3}
+      propertyPath: ShapeModule.angle
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092813491136772813, guid: b1fb68dfaed05c04f9f34db1d6c608cc, type: 3}
+      propertyPath: ShapeModule.m_Position.y
+      value: -0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 9092813491136772813, guid: b1fb68dfaed05c04f9f34db1d6c608cc, type: 3}
       propertyPath: ShapeModule.radius.value
-      value: 0.3
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092813491136772813, guid: b1fb68dfaed05c04f9f34db1d6c608cc, type: 3}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092813491136772813, guid: b1fb68dfaed05c04f9f34db1d6c608cc, type: 3}
+      propertyPath: ShapeModule.randomPositionAmount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092813491136772813, guid: b1fb68dfaed05c04f9f34db1d6c608cc, type: 3}
+      propertyPath: ShapeModule.randomDirectionAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092813491136772813, guid: b1fb68dfaed05c04f9f34db1d6c608cc, type: 3}
+      propertyPath: ShapeModule.sphericalDirectionAmount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092813491136772813, guid: b1fb68dfaed05c04f9f34db1d6c608cc, type: 3}
+      propertyPath: EmissionModule.rateOverTime.minMaxState
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092813491136772813, guid: b1fb68dfaed05c04f9f34db1d6c608cc, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[0].time
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092813491136772813, guid: b1fb68dfaed05c04f9f34db1d6c608cc, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[0].value
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -25856,7 +25884,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 5006816369235493137}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 41a170f60be86d242a416b438a2f6cc1, type: 3}
   m_Name: 
