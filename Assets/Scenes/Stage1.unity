@@ -25703,18 +25703,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: StageManager
       objectReference: {fileID: 0}
-    - target: {fileID: 7234870795090144873, guid: f539aea4c40c4ed40bf9f14cd17aef99, type: 3}
-      propertyPath: _scenes.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7234870795090144873, guid: f539aea4c40c4ed40bf9f14cd17aef99, type: 3}
-      propertyPath: '_scenes.Array.data[0]'
-      value: Stage1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7234870795090144873, guid: f539aea4c40c4ed40bf9f14cd17aef99, type: 3}
-      propertyPath: '_scenes.Array.data[1]'
-      value: Stage2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
