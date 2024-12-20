@@ -25858,6 +25858,18 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9092813491136772813, guid: b1fb68dfaed05c04f9f34db1d6c608cc, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0.8113208
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092813491136772813, guid: b1fb68dfaed05c04f9f34db1d6c608cc, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.8113208
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092813491136772813, guid: b1fb68dfaed05c04f9f34db1d6c608cc, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0.8113208
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092813491136772813, guid: b1fb68dfaed05c04f9f34db1d6c608cc, type: 3}
       propertyPath: ShapeModule.sphericalDirectionAmount
       value: 0
       objectReference: {fileID: 0}
