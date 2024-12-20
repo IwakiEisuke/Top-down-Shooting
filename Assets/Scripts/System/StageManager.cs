@@ -13,8 +13,8 @@ public class StageManager : MonoBehaviour
         Debug.Log("clear!");
         if ( _currentStage < _scenes.Length)
         {
-            Debug.Log($"next stage => {_currentStage}");
             _currentStage++;
+            Debug.Log($"next stage => {_currentStage}");
             StartCoroutine(Load());
         }
     }
