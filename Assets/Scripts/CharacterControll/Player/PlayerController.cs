@@ -3,19 +3,19 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] Renderer _model;
     [SerializeField] LayerMask _canGroundedLayer;
 
-    [Header("Jump")]
-    [SerializeField] float _jumpForce = 10;
-    [SerializeField] int _jumpCount = 2;
-    [SerializeField] float _gravityScale = 1;
-
-    [Header("Move")]
-    [SerializeField] float _speed = 10;
+    [Header("Locomotion")]
+    [SerializeField] float _maxSpeed = 10;
     [SerializeField] float _maxAccel = 150;
-    [SerializeField] float _maxVerticalAccel = 150;
-    [SerializeField] float _maxFallVelocity = 30;
+    [SerializeField] float _inAirAccel = 50;
+    [SerializeField] AnimationCurve _airDrag;
+    
+    [Header("Jumping")]
+    [SerializeField] float _jumpSpeed = 10;
+    [SerializeField] int _jumpCount = 2;
+    [SerializeField] float _gravity;
+    [SerializeField] float _maxFallSpeed = 30;
 
     Rigidbody _rb;
     Vector3 _input;
@@ -31,58 +31,46 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        var goalVel = _input * _speed;
+        _rb.linearVelocity = Vector3.MoveTowards(_rb.linearVelocity, Vector3.zero, _airDrag.Evaluate(_rb.linearVelocity.magnitude) * Time.fixedDeltaTime);
+
         var currHVel = new Vector3(_rb.linearVelocity.x, 0, _rb.linearVelocity.z);
         var currVVel = Vector3.up * _rb.linearVelocity.y;
 
-        var newHVel = Vector3.MoveTowards(currHVel, goalVel, _maxAccel * Time.fixedDeltaTime);
-        var newVVel = Vector3.MoveTowards(currVVel, Physics.gravity * _maxFallVelocity, _maxVerticalAccel * Time.fixedDeltaTime);
-        if (_isGrounded) newVVel = Physics.gravity * Time.fixedDeltaTime;
+        var newHVel = Vector3.MoveTowards(currHVel, _input * _maxSpeed, (_isGrounded ? _maxAccel : _inAirAccel) * Time.fixedDeltaTime);
+        var newVVel = Vector3.MoveTowards(currVVel, Physics.gravity.normalized * _maxFallSpeed, _gravity * Time.fixedDeltaTime);
 
         _rb.linearVelocity = newHVel + newVVel;
+    }
+    
+    private bool IsGrounded(Collision collision)
+    {
+        if ((collision.gameObject.layer & _canGroundedLayer) != 0) return false;
+
+        if (collision.GetContact(0).normal.y > 0.5f)
+        {
+            _currJumpCount = 0;
+            _isGrounded = true;
+            return true;
+        }
+        return false;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        IsGrounded(collision);
     }
 
     private void OnCollisionStay(Collision collision)
     {
-        if (IsGrounded())
-        {
-            _currJumpCount = 0;
-            _isGrounded = true;
-        }
+        IsGrounded(collision);
     }
-
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    if (IsGrounded())
-    //    {
-    //        _currJumpCount = 0;
-    //        _isGrounded = true;
-    //    }
-    //}
 
     private void OnCollisionExit(Collision collision)
     {
         _isGrounded = false;
     }
 
-    private bool IsGrounded()
-    {
-        // ê⁄ínîªíË
-        var stepHeight = 0.1f;
-        var halfExtent = 0.5f;
-        var extentMargin = 0.05f;
-        var extents = new Vector3(halfExtent - extentMargin, halfExtent, halfExtent - extentMargin);
 
-        if (_rb.linearVelocity.y <= 0)
-        {
-            if (Physics.BoxCast(_model.bounds.center + Vector3.up * stepHeight, extents, Vector3.down, Quaternion.identity, halfExtent + stepHeight, _canGroundedLayer))
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
 
     /*
      *     inputs
@@ -98,7 +86,7 @@ public class PlayerController : MonoBehaviour
     {
         if (_currJumpCount < _jumpCount)
         {
-            _rb.linearVelocity += Vector3.up * (_jumpForce - _rb.linearVelocity.y);
+            _rb.linearVelocity += Vector3.up * (_jumpSpeed - _rb.linearVelocity.y);
             _currJumpCount++;
             _isGrounded = false;
         }

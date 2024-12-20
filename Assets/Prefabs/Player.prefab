@@ -177,6 +177,7 @@ GameObject:
   - component: {fileID: 3454079395575690097}
   - component: {fileID: 1890767397062645438}
   - component: {fileID: 849853586220766324}
+  - component: {fileID: 5002943214661735553}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -193,7 +194,7 @@ Transform:
   m_GameObject: {fileID: 7850331744789865793}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.5312707, y: 1.7519121, z: 1.6646175}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -212,12 +213,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f99a37aa6bf378f4180f275604d41ecc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 10
-  _jumpForce: 10
-  _jumpCount: 2
   _canGroundedLayer:
     serializedVersion: 2
-    m_Bits: 8127
+    m_Bits: 0
+  _maxSpeed: 10
+  _maxAccel: 200
+  _inAirAccel: 50
+  _airDrag:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 20
+      value: 0
+      inSlope: 20
+      outSlope: 20
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 25
+      value: 100
+      inSlope: 20
+      outSlope: 20
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _jumpSpeed: 20
+  _jumpCount: 2
+  _gravity: 50
+  _maxFallSpeed: 30
 --- !u!114 &1370435961064276137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,8 +307,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7850331744789865793}
   serializedVersion: 4
-  m_Mass: 0.5
-  m_Drag: 5
+  m_Mass: 1
+  m_Drag: 0
   m_AngularDrag: 10
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -292,7 +321,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
@@ -401,3 +430,15 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &5002943214661735553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7850331744789865793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4af1102124d28a545a544a142a073413, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
