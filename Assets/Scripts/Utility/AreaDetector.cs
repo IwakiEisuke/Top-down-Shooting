@@ -26,7 +26,7 @@ public class AreaDetector : MonoBehaviour
     {
         if (_autoDetectionCompleted)
         {
-            foreach (GameObject obj in _detectObjects)
+            foreach (var obj in _detectObjects)
             {
                 if (obj && obj.activeInHierarchy == true)
                 {

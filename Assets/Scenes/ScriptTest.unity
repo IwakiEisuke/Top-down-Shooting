@@ -2066,6 +2066,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3102819913195263950, guid: b1fb68dfaed05c04f9f34db1d6c608cc, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5246221109715180560, guid: b1fb68dfaed05c04f9f34db1d6c608cc, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7850331744789865793, guid: b1fb68dfaed05c04f9f34db1d6c608cc, type: 3}
       propertyPath: m_Name
       value: Player
@@ -2212,6 +2220,18 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 4707618267981539780, guid: fbbb48f2283fa734f998183626bef398, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4707618267981539780, guid: fbbb48f2283fa734f998183626bef398, type: 3}
+      propertyPath: m_AutoBraking
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4892488028696568094, guid: fbbb48f2283fa734f998183626bef398, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7076901204966423310, guid: fbbb48f2283fa734f998183626bef398, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6
@@ -2260,8 +2280,20 @@ PrefabInstance:
       propertyPath: particleSpeed
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 8943905771905317467, guid: fbbb48f2283fa734f998183626bef398, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9045617406435963373, guid: fbbb48f2283fa734f998183626bef398, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9045617406435963373, guid: fbbb48f2283fa734f998183626bef398, type: 3}
       propertyPath: _notMoving
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9097843237173005379, guid: fbbb48f2283fa734f998183626bef398, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

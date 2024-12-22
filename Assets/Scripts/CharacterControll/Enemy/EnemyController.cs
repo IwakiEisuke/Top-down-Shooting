@@ -22,6 +22,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] float _stoppingDistance;
     [Tooltip("後退しない")]
     [SerializeField] bool _notBackwards;
+    
     float _initialBaseOffset;
     Transform _player;
     Rigidbody _rb;
@@ -134,26 +135,26 @@ public class EnemyController : MonoBehaviour
         moveDir.y = 0;
         moveDir = Quaternion.Euler(0, Random.Range(-120, 120), 0) * moveDir;
         moveDir.Normalize();
-        var target = Vector3.zero;
+        Vector3 destination;
 
         if (_notBackwards)
         {
             if (CheckPassPlayer() && (_player.transform.position - transform.position).sqrMagnitude < _stoppingDistance * _stoppingDistance)
             {
-                target = transform.position;
+                destination = transform.position;
             }
             else
             {
-                target = _player.transform.position;
+                destination = _player.transform.position;
             }
         }
         else
         {
-            target = transform.position + moveDir * _speed;
+            destination = transform.position + moveDir * _speed;
         }
 
         yield return new WaitUntil(() => _playerDetected);
-        if(_agent.isOnNavMesh) _agent.destination = target;
+        if(_agent.isOnNavMesh) _agent.destination = destination;
         yield return new WaitForSeconds(0.5f);
 
         if (CheckPassPlayer())

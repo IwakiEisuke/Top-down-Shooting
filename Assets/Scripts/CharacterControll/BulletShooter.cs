@@ -32,7 +32,7 @@ public class BulletShooter : MonoBehaviour
         }
     }
 
-    virtual protected void Update()
+    protected void Update()
     {
         _timeSinceShoot += Time.deltaTime;
     }

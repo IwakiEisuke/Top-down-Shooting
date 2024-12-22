@@ -16,7 +16,7 @@ public class EnemyBulletShooter : BulletShooter
         _player = GameObject.Find(_playerName).transform;
     }
 
-    override protected void Update()
+    protected new void Update()
     {
         base.Update();
         TryShoot(_player.position);
