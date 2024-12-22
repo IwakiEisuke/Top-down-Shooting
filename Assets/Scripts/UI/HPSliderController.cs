@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 
 public class HPSliderController : MonoBehaviour
@@ -9,10 +9,10 @@ public class HPSliderController : MonoBehaviour
 
     private void Start()
     {
-        _health.onTakeDamage.AddListener(() => UpdateHPSlider());
+        _health.onDamage.AddListener(() => UpdateHPSlider());
         _health.onHeal.AddListener(() => UpdateHPSlider());
 
-        // ƒXƒ‰ƒCƒ_[‰Šú‰»
+        // ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼åˆæœŸåŒ–
         var maxHP = _health.GetMaxHealth();
         var sliderRect = _hpSlider.GetComponent<RectTransform>();
         sliderRect.sizeDelta = new Vector2(_hpSprite.width * maxHP, sliderRect.sizeDelta.y);

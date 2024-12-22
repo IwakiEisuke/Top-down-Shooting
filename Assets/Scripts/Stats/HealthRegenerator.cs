@@ -1,11 +1,11 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [RequireComponent(typeof(IHealth))]
 public class HealthRegenerator : MonoBehaviour, IDamageable
 {
-    [Tooltip("ƒ_ƒ[ƒW‚ğó‚¯‚Ä‚©‚çÄ¶‚ğŠJn‚·‚é‚Ü‚Å‚ÌŠÔ")]
+    [Tooltip("ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’å—ã‘ã¦ã‹ã‚‰å†ç”Ÿã‚’é–‹å§‹ã™ã‚‹ã¾ã§ã®æ™‚é–“")]
     [SerializeField, Min(0)] float _regenDelay = 2;
-    [Tooltip("–ˆ•b‚ÌÄ¶—Ê")]
+    [Tooltip("æ¯ç§’ã®å†ç”Ÿé‡")]
     [SerializeField, Min(0.0001f)] float _regenSpeed = 1;
     IHealth _health;
 

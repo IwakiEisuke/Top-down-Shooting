@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
@@ -6,9 +6,9 @@ public class BulletShooter : MonoBehaviour
 {
     [SerializeField] GameObject _bulletPref;
     [SerializeField, FormerlySerializedAs("_shootForce")] float _bulletSpeed = 10;
-    [Tooltip("ËŒ‚s“®‚É’e‚ğŒ‚‚ÂŠÔŠu")]
+    [Tooltip("å°„æ’ƒè¡Œå‹•æ™‚ã«å¼¾ã‚’æ’ƒã¤é–“éš”")]
     [SerializeField] float _bulletInterval = 0.2f;
-    [Tooltip("’e‚Ìƒoƒ‰‚Â‚«“x‡‚¢")]
+    [Tooltip("å¼¾ã®ãƒãƒ©ã¤ãåº¦åˆã„")]
     [SerializeField] float _angleRandomness;
     [SerializeField] bool _doRandomizeXAxisRotation;
     protected bool _isAttacking = false;
@@ -24,7 +24,7 @@ public class BulletShooter : MonoBehaviour
             bullet.transform.position = transform.position;
             bullet.transform.forward = targetPos - transform.position;
             var rb = bullet.GetComponent<Rigidbody>();
-            // ’e‚ğƒoƒ‰‚Â‚©‚¹‚é
+            // å¼¾ã‚’ãƒãƒ©ã¤ã‹ã›ã‚‹
             var xr = _doRandomizeXAxisRotation ? Random.Range(-_angleRandomness / 2, _angleRandomness / 2) : 0;
             var yr = Random.Range(-_angleRandomness / 2, _angleRandomness / 2);
             var forward = Quaternion.Euler(xr, yr, 0) * bullet.transform.forward;
@@ -32,7 +32,7 @@ public class BulletShooter : MonoBehaviour
         }
     }
 
-    virtual protected void Update()
+    protected void Update()
     {
         _timeSinceShoot += Time.deltaTime;
     }

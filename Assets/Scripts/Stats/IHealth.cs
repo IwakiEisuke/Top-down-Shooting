@@ -1,4 +1,4 @@
-public interface IHealth
+﻿public interface IHealth
 {
     void Damage(int damage);
     void Heal(int amount);

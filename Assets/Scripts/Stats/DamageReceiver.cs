@@ -1,7 +1,7 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 /// <summary>
-/// ƒ_ƒ[ƒW‚ğó‚¯æ‚é
+/// ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’å—ã‘å–ã‚‹
 /// </summary>
 public class DamageReceiver : MonoBehaviour, IDamageable
 {

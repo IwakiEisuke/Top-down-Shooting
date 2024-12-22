@@ -57,6 +57,10 @@ PrefabInstance:
       value: FastShooter
       objectReference: {fileID: 0}
     - target: {fileID: 9139415468450241765, guid: fbbb48f2283fa734f998183626bef398, type: 3}
+      propertyPath: _bulletPref
+      value: 
+      objectReference: {fileID: 7608199428028891610, guid: 89439fb5df762244cb5d9ea7417c323a, type: 3}
+    - target: {fileID: 9139415468450241765, guid: fbbb48f2283fa734f998183626bef398, type: 3}
       propertyPath: _shootForce
       value: 30
       objectReference: {fileID: 0}

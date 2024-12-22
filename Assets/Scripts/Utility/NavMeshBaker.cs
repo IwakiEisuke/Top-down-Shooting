@@ -1,4 +1,4 @@
-using Unity.AI.Navigation;
+﻿using Unity.AI.Navigation;
 using UnityEngine;
 
 [RequireComponent(typeof(NavMeshSurface))]

@@ -1,28 +1,49 @@
+ï»¿using DG.Tweening;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UIElements;
 
 /// <summary>
-/// ‘Ì—Í‚ğŠÇ—‚·‚éƒRƒ“ƒ|[ƒlƒ“ƒg
+/// ä½“åŠ›ã‚’ç®¡ç†ã™ã‚‹ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
 /// </summary>
 public class Health : MonoBehaviour, IHealth
 {
     [SerializeField] int _maxHealth = 5;
-    public UnityEvent onTakeDamage;
+
+    [Space(16)]
+    public UnityEvent onDamage;
     public UnityEvent onHeal;
     public UnityEvent onDie;
     int _health = 5;
 
+    [SerializeField] float _damageTime = 0.1f;
+    Color _originalColor;
+    Renderer _renderer;
+
     private void Awake()
     {
+        _renderer = GetComponent<Renderer>();
+        _originalColor = _renderer.material.color;
+
         _health = _maxHealth;
     }
 
     public void Damage(int damage)
     {
+        if (!enabled) return;
+
         _health -= damage;
-        onTakeDamage.Invoke();
+        onDamage.Invoke();
+        DamageHitEffect();
 
         if (_health <= 0) Death();
+    }
+
+    void DamageHitEffect()
+    {
+        _renderer.material.color = Color.red;
+        _renderer.material.DOColor(_originalColor, _damageTime);
     }
 
     public void Heal(int amount)

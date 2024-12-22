@@ -44,5 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e0fa1236e0498e41add71f6f2cc9774, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scenes: []
-  _timeOffset: 0
+  _scenes:
+  - Stage1
+  - Stage2
+  _timeOffset: 2

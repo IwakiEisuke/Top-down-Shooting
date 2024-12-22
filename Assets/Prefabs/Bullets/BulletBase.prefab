@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 3563768894266395803}
   - component: {fileID: 1207799746118600021}
   m_Layer: 6
-  m_Name: SmallBullet
+  m_Name: BulletBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,7 +51,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 891f5a5589fa17a459cdbd51355d20c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 1
   _existDuration: 3
   _destroyOnCollide: 1
   _reflects:
@@ -83,6 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75c6e35cac1132245a2fd64e1c68d7f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _knockbackTime: 0.5
 --- !u!54 &8064989092142547943
 Rigidbody:
   m_ObjectHideFlags: 0
