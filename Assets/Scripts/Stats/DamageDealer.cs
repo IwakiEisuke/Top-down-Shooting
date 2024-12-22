@@ -1,7 +1,7 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 /// <summary>
-/// IDamageable‚ªÀ‘•‚³‚ê‚Ä‚¢‚éƒNƒ‰ƒX‚Éƒ_ƒ[ƒW‚ğ—^‚¦‚é
+/// IDamageableãŒå®Ÿè£…ã•ã‚Œã¦ã„ã‚‹ã‚¯ãƒ©ã‚¹ã«ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’ä¸ãˆã‚‹
 /// </summary>
 public class DamageDealer : MonoBehaviour
 {

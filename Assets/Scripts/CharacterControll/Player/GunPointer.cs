@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class GunPointer : MonoBehaviour
 {
@@ -6,13 +6,13 @@ public class GunPointer : MonoBehaviour
     [SerializeField] Transform _muzzle;
     [SerializeField] float _maxDistance = 100;
 
-    [Header("Æ€•â³‹@”\")]
+    [Header("ç…§æº–è£œæ­£æ©Ÿèƒ½")]
     [SerializeField] bool _assist;
     [SerializeField] float _yAssistRange = 0.5f;
     [SerializeField] float _distanceToGround = 0.5f;
 
     /// <summary>
-    /// I’[ˆÊ’u
+    /// çµ‚ç«¯ä½ç½®
     /// </summary>
     public Vector3 HitPosition { get; private set; }
 
@@ -28,14 +28,14 @@ public class GunPointer : MonoBehaviour
         _line.SetPosition(0, _muzzle.transform.position);
         Ray cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(cameraRay, out var cameraHit, float.MaxValue, _layerMask)) // ƒJƒƒ‰‚©‚çƒ}ƒEƒXˆÊ’u‚ÉƒŒƒC‚ğ”ò‚Î‚·
+        if (Physics.Raycast(cameraRay, out var cameraHit, float.MaxValue, _layerMask)) // ã‚«ãƒ¡ãƒ©ã‹ã‚‰ãƒã‚¦ã‚¹ä½ç½®ã«ãƒ¬ã‚¤ã‚’é£›ã°ã™
         {
-            // ©•ªˆÈŠO‚Ìƒ_ƒ[ƒW‚ğó‚¯æ‚éƒIƒuƒWƒFƒNƒg‚Ìê‡ƒAƒVƒXƒg‚Ì‰e‹¿‚ğó‚¯‚È‚¢
+            // è‡ªåˆ†ä»¥å¤–ã®ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’å—ã‘å–ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å ´åˆã‚¢ã‚·ã‚¹ãƒˆã®å½±éŸ¿ã‚’å—ã‘ãªã„
             if (cameraHit.transform != this.transform && cameraHit.collider.GetComponent<IDamageable>() != null)
             {
                 SetPoint(cameraHit.point);
             }
-            // ƒ}ƒEƒXˆÊ’u‚Ì‚‚³‚ªƒvƒŒƒCƒ„[‚Ì–Úü‚©‚ç—§‚Á‚Ä‚¢‚é’n–Ê‚Ü‚Å‚ÌŠÔ‚É‚ ‚éê‡‚‚³‚ğƒvƒŒƒCƒ„[‚Ì–Úü‚É‚·‚é
+            // ãƒã‚¦ã‚¹ä½ç½®ã®é«˜ã•ãŒãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ç›®ç·šã‹ã‚‰ç«‹ã£ã¦ã„ã‚‹åœ°é¢ã¾ã§ã®é–“ã«ã‚ã‚‹å ´åˆé«˜ã•ã‚’ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ç›®ç·šã«ã™ã‚‹
             else if (_assist && Mathf.Abs(transform.position.y - _distanceToGround - cameraHit.point.y) < _yAssistRange)
             {
                 var assistedPos = cameraHit.point;
@@ -47,7 +47,7 @@ public class GunPointer : MonoBehaviour
                 SetPoint(cameraHit.point);
             }
         }
-        else // ƒŒƒC‚ªƒqƒbƒg‚µ‚È‚©‚Á‚½‚çƒvƒŒƒCƒ„[‚Æ‘å‘Ì“¯‚¶‚‚³‚Ìƒ}ƒEƒXˆÊ’u‚ğ—^‚¦‚é
+        else // ãƒ¬ã‚¤ãŒãƒ’ãƒƒãƒˆã—ãªã‹ã£ãŸã‚‰ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨å¤§ä½“åŒã˜é«˜ã•ã®ãƒã‚¦ã‚¹ä½ç½®ã‚’ä¸ãˆã‚‹
         {
             var mousePos = Input.mousePosition;
             mousePos.z = Vector3.Distance(_muzzle.transform.position, Camera.main.transform.position);
@@ -57,21 +57,21 @@ public class GunPointer : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒvƒŒƒCƒ„[ˆÊ’u‚©‚çƒ^[ƒQƒbƒg‚ÉƒŒƒC‚ğ”ò‚Î‚µAÕ“Ë‚©‚çƒ|ƒCƒ“ƒ^[‚ÌI“_ˆÊ’u‚ğŒˆ’è‚·‚é
+    /// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ä½ç½®ã‹ã‚‰ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã«ãƒ¬ã‚¤ã‚’é£›ã°ã—ã€è¡çªã‹ã‚‰ãƒã‚¤ãƒ³ã‚¿ãƒ¼ã®çµ‚ç‚¹ä½ç½®ã‚’æ±ºå®šã™ã‚‹
     /// </summary>
     /// <param name="target"></param>
     void SetPoint(Vector3 target)
     {
-        // ƒvƒŒƒCƒ„[ˆÊ’u‚©‚çƒ^[ƒQƒbƒg‚ÉƒŒƒC‚ğ”ò‚Î‚·
+        // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ä½ç½®ã‹ã‚‰ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã«ãƒ¬ã‚¤ã‚’é£›ã°ã™
         Ray lineRay = new(_muzzle.transform.position, target - _muzzle.transform.position);
         if (Physics.Raycast(lineRay, out var lineHit, _maxDistance, _layerMask))
         {
-            // ƒŒƒC‚ª“–‚½‚ê‚Î‚»‚ÌˆÊ’u‚ğI’[‚É‚·‚é
+            // ãƒ¬ã‚¤ãŒå½“ãŸã‚Œã°ãã®ä½ç½®ã‚’çµ‚ç«¯ã«ã™ã‚‹
             HitPosition = lineHit.point;
         }
         else
         {
-            // ƒŒƒC‚ª“–‚½‚ç‚È‚¯‚ê‚ÎƒvƒŒƒCƒ„[‚©‚çƒ^[ƒQƒbƒg•ûŒü‚Öˆê’è‹——£L‚Î‚µ‚½ˆÊ’u‚ğI’[‚É‚·‚é
+            // ãƒ¬ã‚¤ãŒå½“ãŸã‚‰ãªã‘ã‚Œã°ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‹ã‚‰ã‚¿ãƒ¼ã‚²ãƒƒãƒˆæ–¹å‘ã¸ä¸€å®šè·é›¢ä¼¸ã°ã—ãŸä½ç½®ã‚’çµ‚ç«¯ã«ã™ã‚‹
             HitPosition = _muzzle.transform.position + (target - _muzzle.transform.position).normalized * _maxDistance;
         }
         _line.SetPosition(1, HitPosition);

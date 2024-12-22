@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.AI;
 
 public class Bullet : MonoBehaviour
@@ -18,16 +18,16 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        // ’µ’eˆ—
-        // layerMask‚Í‰½Œ…–Ú‚É1‚ª‚ ‚é‚©AgameObject.layer‚ÍƒŒƒCƒ„[”Ô†‚»‚Ì‚Ü‚Ü‚Ì®”
+        // è·³å¼¾å‡¦ç†
+        // layerMaskã¯ä½•æ¡ç›®ã«1ãŒã‚ã‚‹ã‹ã€gameObject.layerã¯ãƒ¬ã‚¤ãƒ¤ãƒ¼ç•ªå·ãã®ã¾ã¾ã®æ•´æ•°
         if ((_reflects &= 1 << collision.gameObject.layer) != 0)
         {
-            // ‘¬“x‚É”½ËƒxƒNƒgƒ‹‚ğ‘ã“ü
+            // é€Ÿåº¦ã«åå°„ãƒ™ã‚¯ãƒˆãƒ«ã‚’ä»£å…¥
             _rb.linearVelocity = Vector3.Reflect(-collision.relativeVelocity, collision.GetContact(0).normal);
-            transform.forward = _rb.linearVelocity; // is•ûŒü‚ÉŒü‚©‚¹‚é
+            transform.forward = _rb.linearVelocity; // é€²è¡Œæ–¹å‘ã«å‘ã‹ã›ã‚‹
         }
 
-        var layerMask = ~_reflects; // ‚È‚º‚©ƒCƒ“ƒ‰ƒCƒ“‚¾‚Æ”½“]‚Å‚«‚È‚¢c
+        var layerMask = ~_reflects; // ãªãœã‹ã‚¤ãƒ³ãƒ©ã‚¤ãƒ³ã ã¨åè»¢ã§ããªã„â€¦
         if (_destroyOnCollide && (layerMask &= 1 << collision.gameObject.layer) != 0)
         {
             DestroyBullet();

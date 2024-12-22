@@ -1,8 +1,8 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.AI;
 
 /// <summary>
-/// Controller‚ÉÕŒ‚‚ğ—^‚¦‚é”\—Í‚ğ‚½‚¹‚éƒRƒ“ƒ|[ƒlƒ“ƒg
+/// Controllerã«è¡æ’ƒã‚’ä¸ãˆã‚‹èƒ½åŠ›ã‚’æŒãŸã›ã‚‹ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
 /// </summary>
 public class KnockbackSender : MonoBehaviour
 {

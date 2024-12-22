@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,16 +11,16 @@ public class EnemyController : MonoBehaviour
     [SerializeField] float _timeOfLoseSight;
     [SerializeField] float _groundDetectDistance;
     [SerializeField] float _canGroundedAngle;
-    [Tooltip("Ëü‚ª’Ê‚Á‚Ä‚È‚¢‚ÆŒŸ’m‚µ‚È‚¢")]
+    [Tooltip("å°„ç·šãŒé€šã£ã¦ãªã„ã¨æ¤œçŸ¥ã—ãªã„")]
     [SerializeField] bool _needSeenForDetection;
-    [Tooltip("‚»‚Ìê‚©‚ç“®‚©‚È‚¢")]
+    [Tooltip("ãã®å ´ã‹ã‚‰å‹•ã‹ãªã„")]
     [SerializeField] bool _notMoving;
-    [Tooltip("—‰º‚µ‚È‚¢")]
+    [Tooltip("è½ä¸‹ã—ãªã„")]
     [SerializeField] bool _flying;
     [SerializeField] float _flyingBouncy;
     [SerializeField] float _cycleTime;
     [SerializeField] float _stoppingDistance;
-    [Tooltip("Œã‘Ş‚µ‚È‚¢")]
+    [Tooltip("å¾Œé€€ã—ãªã„")]
     [SerializeField] bool _notBackwards;
     float _initialBaseOffset;
     Transform _player;
@@ -48,11 +48,11 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
-        //@ƒvƒŒƒCƒ„[‚ªˆê’è‹——£‚É“ü‚Á‚½‚© && ƒvƒŒƒCƒ„[‚ğ‹”F‚Å‚«‚é‚©
+        //ã€€ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒä¸€å®šè·é›¢ã«å…¥ã£ãŸã‹ && ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’è¦–èªã§ãã‚‹ã‹
         if ((_player.transform.position - transform.position).sqrMagnitude <= _playerDetectDistance * _playerDetectDistance
             && (!_needSeenForDetection || CheckPassPlayer()))
         {
-            //@ŒŸ’mó‘Ô‚ÉˆÚs
+            //ã€€æ¤œçŸ¥çŠ¶æ…‹ã«ç§»è¡Œ
             _playerDetected = true;
             _playerUnDetectedTime = 0;
         }
@@ -62,21 +62,21 @@ public class EnemyController : MonoBehaviour
 
             if (_playerUnDetectedTime > _timeOfLoseSight)
             {
-                // ˆê’èŠÔƒvƒŒƒCƒ„[‚ğ”F¯‚Å‚«‚È‚¯‚ê‚ÎŒŸ’mó‘Ô‚ğ‰ğœ
+                // ä¸€å®šæ™‚é–“ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’èªè­˜ã§ããªã‘ã‚Œã°æ¤œçŸ¥çŠ¶æ…‹ã‚’è§£é™¤
                 _playerDetected = false;
             }
         }
 
         if (_notMoving)
         {
-            // ’â~ˆ—
+            // åœæ­¢å‡¦ç†
             _agent.enabled = false;
-            // UŒ‚‚È‚Ç‚Ì“®ì‚Ís‚¤
+            // æ”»æ’ƒãªã©ã®å‹•ä½œã¯è¡Œã†
             NextState();
         }
         else if (_flying)
         {
-            // ƒtƒƒtƒ•‚‚©‚¹‚é
+            // ãƒ•ãƒ¯ãƒ•ãƒ¯æµ®ã‹ã›ã‚‹
             _agent.baseOffset = _initialBaseOffset + Mathf.Cos(2 * Mathf.PI * Time.time / _cycleTime) * _flyingBouncy;
             NextState();
 
@@ -84,7 +84,7 @@ public class EnemyController : MonoBehaviour
 
             if (CheckPassPlayer() && distance < _stoppingDistance)
             {
-                // ƒG[ƒWƒFƒ“ƒg‚ÌƒuƒŒ[ƒL‚ğg‚Á‚Ä’â~‚³‚¹‚é
+                // ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã®ãƒ–ãƒ¬ãƒ¼ã‚­ã‚’ä½¿ã£ã¦åœæ­¢ã•ã›ã‚‹
                 _agent.stoppingDistance = 1000000;
             }
             else
@@ -92,11 +92,11 @@ public class EnemyController : MonoBehaviour
                 _agent.stoppingDistance = 0;
             }
         }
-        else // ”ò‚ñ‚Å‚¢‚È‚¢ê‡A’n–ÊŒŸ’m‚ğs‚¤
+        else // é£›ã‚“ã§ã„ãªã„å ´åˆã€åœ°é¢æ¤œçŸ¥ã‚’è¡Œã†
         {
             if (_agent.isOnNavMesh)
             {
-                // notMoving ‰ğœ—p
+                // notMoving è§£é™¤ç”¨
                 _agent.updatePosition = true;
                 _agent.isStopped = false;
             }
@@ -105,7 +105,7 @@ public class EnemyController : MonoBehaviour
             NavMesh.SamplePosition(transform.position, out var navHit, _groundDetectDistance, NavMesh.AllAreas);
             Physics.Raycast(transform.position, transform.up * -1, out var hit, _groundDetectDistance);
 
-            // ˆê’è‹——£ˆÈ“à‚ÉƒiƒrƒƒbƒVƒ…‚ª‚ ‚é && ‘«Œ³•ûŒü‚Ìˆê’è‹——£“à‚É’n–Ê‚ª‚ ‚é && ’n–Ê‚ÌŒX‚«‚ª­‚È‚¢
+            // ä¸€å®šè·é›¢ä»¥å†…ã«ãƒŠãƒ“ãƒ¡ãƒƒã‚·ãƒ¥ãŒã‚ã‚‹ && è¶³å…ƒæ–¹å‘ã®ä¸€å®šè·é›¢å†…ã«åœ°é¢ãŒã‚ã‚‹ && åœ°é¢ã®å‚¾ããŒå°‘ãªã„
             if (navHit.hit && hit.collider && Vector3.Dot(hit.normal, Vector3.up) > cos)
             {
                 _agent.enabled = true;
@@ -114,7 +114,7 @@ public class EnemyController : MonoBehaviour
             }
             else
             {
-                // ƒG[ƒWƒFƒ“ƒg‚ğØ‚èAŒ»İ‚Ìs“®‚ğƒLƒƒƒ“ƒZƒ‹
+                // ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆã‚’åˆ‡ã‚Šã€ç¾åœ¨ã®è¡Œå‹•ã‚’ã‚­ãƒ£ãƒ³ã‚»ãƒ«
                 _agent.enabled = false;
                 _rb.isKinematic = false;
                 _agent.Warp(transform.position);
@@ -129,7 +129,7 @@ public class EnemyController : MonoBehaviour
 
     IEnumerator Attack()
     {
-        // ƒvƒŒƒCƒ„[‚ÆËü‚ª’Ê‚Á‚Ä‚¢‚ê‚Îƒ‰ƒ“ƒ_ƒ€‚É“®‚­
+        // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨å°„ç·šãŒé€šã£ã¦ã„ã‚Œã°ãƒ©ãƒ³ãƒ€ãƒ ã«å‹•ã
         var moveDir = transform.position - _player.transform.position;
         moveDir.y = 0;
         moveDir = Quaternion.Euler(0, Random.Range(-120, 120), 0) * moveDir;
@@ -175,7 +175,7 @@ public class EnemyController : MonoBehaviour
             }
             else if (_currentCoroutine == null && _agent.isOnNavMesh)
             {
-                _agent.destination = _player.transform.position; // ƒvƒŒƒCƒ„[‚ğ’Ç‚¢‚©‚¯‚é
+                _agent.destination = _player.transform.position; // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’è¿½ã„ã‹ã‘ã‚‹
             }
         }
     }
@@ -188,8 +188,8 @@ public class EnemyController : MonoBehaviour
     private bool CheckPassPlayer(out RaycastHit hit)
     {
         var dir = _player.transform.position - transform.position;
-        Physics.Raycast(transform.position, dir, out hit, float.MaxValue); // ƒvƒŒƒCƒ„[•ûŒü‚ÉƒŒƒC‚ğ”ò‚Î‚·
-        return hit.collider && LayerMask.LayerToName(hit.collider.gameObject.layer) == "Player"; //@ƒŒƒC‚ªƒqƒbƒg‚µ‚½@••@ƒvƒŒƒCƒ„[ˆÈŠO‚É“–‚½‚ç‚È‚©‚Á‚½
+        Physics.Raycast(transform.position, dir, out hit, float.MaxValue); // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼æ–¹å‘ã«ãƒ¬ã‚¤ã‚’é£›ã°ã™
+        return hit.collider && LayerMask.LayerToName(hit.collider.gameObject.layer) == "Player"; //ã€€ãƒ¬ã‚¤ãŒãƒ’ãƒƒãƒˆã—ãŸã€€ï¼†ï¼†ã€€ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ä»¥å¤–ã«å½“ãŸã‚‰ãªã‹ã£ãŸ
     }
 
     private void OnCollisionExit(Collision collision)

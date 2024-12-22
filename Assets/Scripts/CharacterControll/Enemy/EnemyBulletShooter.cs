@@ -1,12 +1,12 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 
 public class EnemyBulletShooter : BulletShooter
 {
     [SerializeField] string _playerName = "Player";
-    [Tooltip("ˆê‰ñ‚ÌËŒ‚‚Å‰½•bŠÔŒ‚‚Â‚©")]
+    [Tooltip("ä¸€å›ã®å°„æ’ƒã§ä½•ç§’é–“æ’ƒã¤ã‹")]
     [SerializeField] float _shootingDuration = 1f;
-    [Tooltip("ËŒ‚s“®‚ğ‚Æ‚ê‚é‚æ‚¤‚É‚È‚é‚Ü‚Å‚ÌƒCƒ“ƒ^[ƒoƒ‹")]
+    [Tooltip("å°„æ’ƒè¡Œå‹•ã‚’ã¨ã‚Œã‚‹ã‚ˆã†ã«ãªã‚‹ã¾ã§ã®ã‚¤ãƒ³ã‚¿ãƒ¼ãƒãƒ«")]
     [SerializeField] float _firingInterval = 3f;
     Transform _player;
     Coroutine _currentCoroutine;

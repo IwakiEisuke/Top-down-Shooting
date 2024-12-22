@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.AI;
 
 public static class MyExtension
@@ -35,7 +35,7 @@ public static class MyExtension
     }
 
     /// <summary>
-    /// Pivot‚©‚çŒ©‚½‘Š‘Î“I‚ÈƒƒbƒVƒ…’†‰›ˆÊ’u‚ÆƒTƒCƒY‚ğ•Ô‚µ‚Ü‚·
+    /// Pivotã‹ã‚‰è¦‹ãŸç›¸å¯¾çš„ãªãƒ¡ãƒƒã‚·ãƒ¥ä¸­å¤®ä½ç½®ã¨ã‚µã‚¤ã‚ºã‚’è¿”ã—ã¾ã™
     /// </summary>
     /// <param name="gameObject"></param>
     /// <param name="center"></param>
@@ -45,9 +45,9 @@ public static class MyExtension
     {
         var renderer = gameObject.GetComponent<Renderer>();
         var targetMesh = gameObject.GetComponent<MeshFilter>().sharedMesh;
-        center = renderer.bounds.center - gameObject.transform.position; // pivotˆÊ’u‚Æƒ‚ƒfƒ‹’†S‚ÌƒYƒŒ‚ğ•â³
-        center += offset; // ‰ñ“]‚Ì‘O‚É‘«‚·
-        center = Quaternion.Inverse(gameObject.transform.rotation) * center; // ‰ñ“]‚Ì‰e‹¿‚ğ‘Å‚¿Á‚µ
+        center = renderer.bounds.center - gameObject.transform.position; // pivotä½ç½®ã¨ãƒ¢ãƒ‡ãƒ«ä¸­å¿ƒã®ã‚ºãƒ¬ã‚’è£œæ­£
+        center += offset; // å›è»¢ã®å‰ã«è¶³ã™
+        center = Quaternion.Inverse(gameObject.transform.rotation) * center; // å›è»¢ã®å½±éŸ¿ã‚’æ‰“ã¡æ¶ˆã—
         if(targetMesh) size = targetMesh.bounds.size;
         else size = Vector3.zero;
     }

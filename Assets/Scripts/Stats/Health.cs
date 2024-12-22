@@ -1,11 +1,11 @@
-using DG.Tweening;
+ï»¿using DG.Tweening;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UIElements;
 
 /// <summary>
-/// ‘Ì—Í‚ğŠÇ—‚·‚éƒRƒ“ƒ|[ƒlƒ“ƒg
+/// ä½“åŠ›ã‚’ç®¡ç†ã™ã‚‹ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
 /// </summary>
 public class Health : MonoBehaviour, IHealth
 {

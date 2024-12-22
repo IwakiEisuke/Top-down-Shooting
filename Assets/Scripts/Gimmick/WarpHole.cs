@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,7 +11,7 @@ public class WarpHole : MonoBehaviour
     {
         if (!_onWarpedObjects.Contains(other))
         {
-            // ƒ[ƒvæ‚Å’n–Ê‚É‚ß‚è‚Ü‚È‚¢‚æ‚¤Aƒ[ƒvƒz[ƒ‹‚©‚ç‚Ì‚‚³‚ğæ‚é
+            // ãƒ¯ãƒ¼ãƒ—å…ˆã§åœ°é¢ã«ã‚ã‚Šè¾¼ã¾ãªã„ã‚ˆã†ã€ãƒ¯ãƒ¼ãƒ—ãƒ›ãƒ¼ãƒ«ã‹ã‚‰ã®é«˜ã•ã‚’å–ã‚‹
             var offset = other.transform.position - transform.position;
             offset.Scale(Vector3.up);
             _target.Warp(other, offset);
