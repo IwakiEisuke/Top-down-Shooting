@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerBulletShooter : BulletShooter
 {
-    [SerializeField] PointerC _pointer;
+    [SerializeField] GunPointer _pointer;
 
     override protected void Update()
     {

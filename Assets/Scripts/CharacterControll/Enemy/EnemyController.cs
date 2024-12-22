@@ -201,7 +201,7 @@ public class EnemyController : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        if (UnityEditor.EditorApplication.isPlaying)
+        if (UnityEditor.EditorApplication.isPlaying && enabled)
         {
             Gizmos.matrix = Matrix4x4.TRS(transform.position, transform.rotation, transform.lossyScale);
 

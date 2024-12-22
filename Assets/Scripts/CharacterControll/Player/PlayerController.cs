@@ -1,41 +1,30 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : ControllerBase
+public class PlayerController : MonoBehaviour
 {
+    [SerializeField] Renderer _model;
+    [SerializeField] RigidbodyController _controller;
     [SerializeField] float _speed = 10;
     [SerializeField] float _jumpForce = 10;
     [SerializeField] int _jumpCount = 2;
     [SerializeField] LayerMask _canGroundedLayer;
+    Rigidbody _rb;
     Vector3 _input;
     Vector3 _respawnPoint;
     Vector3 _jumpVelocity;
-    Renderer _renderer;
     int _currJumpCount;
 
     private void Start()
     {
         _respawnPoint = transform.position;
-        _rb = GetComponent<Rigidbody>();
-        _renderer = GetComponent<Renderer>();
+        _rb = _controller.GetComponent<Rigidbody>();
     }
 
-    protected override void VelocityDecay()
-    {
-        base.VelocityDecay();
-        _jumpVelocity += Physics.gravity * Time.fixedDeltaTime;
-    }
-
-    protected override Vector3 Move()
+    void FixedUpdate()
     {
         _jumpVelocity += Physics.gravity * Time.fixedDeltaTime;
-        var inputVelocity = _input * _speed;
-        return inputVelocity + _externalVelocity + _jumpVelocity;
-    }
-
-    protected override Vector3 Rotate()
-    {
-        return _angularVelocity;
+        _controller.AddVelocity(_input * _speed + _jumpVelocity, Vector3.zero);
     }
 
     private void OnCollisionStay(Collision collision)
@@ -48,7 +37,7 @@ public class PlayerController : ControllerBase
 
         if (_rb.linearVelocity.y <= 0)
         {
-            if (Physics.BoxCast(_renderer.bounds.center + Vector3.up * stepHeight, extents, Vector3.down, Quaternion.identity, halfExtent + stepHeight, _canGroundedLayer))
+            if (Physics.BoxCast(_model.bounds.center + Vector3.up * stepHeight, extents, Vector3.down, Quaternion.identity, halfExtent + stepHeight, _canGroundedLayer))
             {
                 _currJumpCount = 0;
                 _jumpVelocity = Vector3.zero;
